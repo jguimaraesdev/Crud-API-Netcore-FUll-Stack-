@@ -7,8 +7,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<EstacionamentoDbContext>();
-
+builder.Services.AddDbContext<EstacionamentoDbContext>();//bddados
+builder.Services.AddCors();//front
 var app = builder.Build();
 
 
@@ -19,7 +19,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors(opcoes => opcoes.AllowAnyOrigin().AllowAnyHeader());//front
 app.UseAuthorization();
 
 app.MapControllers();
