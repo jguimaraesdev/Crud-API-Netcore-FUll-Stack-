@@ -129,7 +129,7 @@ namespace Estacionamento.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Carro",
+                name: "caminhonete",
                 columns: table => new
                 {
                     _idCarro = table.Column<int>(type: "INTEGER", nullable: false)
@@ -145,27 +145,115 @@ namespace Estacionamento.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Carro", x => x._idCarro);
+                    table.PrimaryKey("PK_caminhonete", x => x._idCarro);
                     table.ForeignKey(
-                        name: "FK_Carro_cliente_Cliente_idCliente",
+                        name: "FK_caminhonete_cliente_Cliente_idCliente",
                         column: x => x.Cliente_idCliente,
                         principalTable: "cliente",
                         principalColumn: "_idCliente",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Carro_marca_Marca_idMarca",
+                        name: "FK_caminhonete_marca_Marca_idMarca",
                         column: x => x.Marca_idMarca,
                         principalTable: "marca",
                         principalColumn: "_idMarca",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Carro_modelo_Modelo_idModelo",
+                        name: "FK_caminhonete_modelo_Modelo_idModelo",
                         column: x => x.Modelo_idModelo,
                         principalTable: "modelo",
                         principalColumn: "_idModelo",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Carro_veiculo_Veiculo_idVeiculo",
+                        name: "FK_caminhonete_veiculo_Veiculo_idVeiculo",
+                        column: x => x.Veiculo_idVeiculo,
+                        principalTable: "veiculo",
+                        principalColumn: "_idVeiculo",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "carro",
+                columns: table => new
+                {
+                    _idCarro = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    _idVeiculo = table.Column<int>(type: "INTEGER", nullable: false),
+                    _idMarca = table.Column<int>(type: "INTEGER", nullable: false),
+                    _idModelo = table.Column<int>(type: "INTEGER", nullable: false),
+                    _idCliente = table.Column<int>(type: "INTEGER", nullable: false),
+                    Veiculo_idVeiculo = table.Column<int>(type: "INTEGER", nullable: false),
+                    Marca_idMarca = table.Column<int>(type: "INTEGER", nullable: false),
+                    Modelo_idModelo = table.Column<int>(type: "INTEGER", nullable: false),
+                    Cliente_idCliente = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_carro", x => x._idCarro);
+                    table.ForeignKey(
+                        name: "FK_carro_cliente_Cliente_idCliente",
+                        column: x => x.Cliente_idCliente,
+                        principalTable: "cliente",
+                        principalColumn: "_idCliente",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_carro_marca_Marca_idMarca",
+                        column: x => x.Marca_idMarca,
+                        principalTable: "marca",
+                        principalColumn: "_idMarca",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_carro_modelo_Modelo_idModelo",
+                        column: x => x.Modelo_idModelo,
+                        principalTable: "modelo",
+                        principalColumn: "_idModelo",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_carro_veiculo_Veiculo_idVeiculo",
+                        column: x => x.Veiculo_idVeiculo,
+                        principalTable: "veiculo",
+                        principalColumn: "_idVeiculo",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "moto",
+                columns: table => new
+                {
+                    _idMoto = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    _idVeiculo = table.Column<int>(type: "INTEGER", nullable: false),
+                    _idMarca = table.Column<int>(type: "INTEGER", nullable: false),
+                    _idModelo = table.Column<int>(type: "INTEGER", nullable: false),
+                    _idCliente = table.Column<int>(type: "INTEGER", nullable: false),
+                    Veiculo_idVeiculo = table.Column<int>(type: "INTEGER", nullable: false),
+                    Marca_idMarca = table.Column<int>(type: "INTEGER", nullable: false),
+                    Modelo_idModelo = table.Column<int>(type: "INTEGER", nullable: false),
+                    Cliente_idCliente = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_moto", x => x._idMoto);
+                    table.ForeignKey(
+                        name: "FK_moto_cliente_Cliente_idCliente",
+                        column: x => x.Cliente_idCliente,
+                        principalTable: "cliente",
+                        principalColumn: "_idCliente",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_moto_marca_Marca_idMarca",
+                        column: x => x.Marca_idMarca,
+                        principalTable: "marca",
+                        principalColumn: "_idMarca",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_moto_modelo_Modelo_idModelo",
+                        column: x => x.Modelo_idModelo,
+                        principalTable: "modelo",
+                        principalColumn: "_idModelo",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_moto_veiculo_Veiculo_idVeiculo",
                         column: x => x.Veiculo_idVeiculo,
                         principalTable: "veiculo",
                         principalColumn: "_idVeiculo",
@@ -190,9 +278,9 @@ namespace Estacionamento.Migrations
                 {
                     table.PrimaryKey("PK_ticket", x => x._idTicket);
                     table.ForeignKey(
-                        name: "FK_ticket_Carro_Carro_idCarro",
+                        name: "FK_ticket_carro_Carro_idCarro",
                         column: x => x.Carro_idCarro,
-                        principalTable: "Carro",
+                        principalTable: "carro",
                         principalColumn: "_idCarro",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -210,23 +298,63 @@ namespace Estacionamento.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Carro_Cliente_idCliente",
-                table: "Carro",
+                name: "IX_caminhonete_Cliente_idCliente",
+                table: "caminhonete",
                 column: "Cliente_idCliente");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Carro_Marca_idMarca",
-                table: "Carro",
+                name: "IX_caminhonete_Marca_idMarca",
+                table: "caminhonete",
                 column: "Marca_idMarca");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Carro_Modelo_idModelo",
-                table: "Carro",
+                name: "IX_caminhonete_Modelo_idModelo",
+                table: "caminhonete",
                 column: "Modelo_idModelo");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Carro_Veiculo_idVeiculo",
-                table: "Carro",
+                name: "IX_caminhonete_Veiculo_idVeiculo",
+                table: "caminhonete",
+                column: "Veiculo_idVeiculo");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_carro_Cliente_idCliente",
+                table: "carro",
+                column: "Cliente_idCliente");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_carro_Marca_idMarca",
+                table: "carro",
+                column: "Marca_idMarca");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_carro_Modelo_idModelo",
+                table: "carro",
+                column: "Modelo_idModelo");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_carro_Veiculo_idVeiculo",
+                table: "carro",
+                column: "Veiculo_idVeiculo");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_moto_Cliente_idCliente",
+                table: "moto",
+                column: "Cliente_idCliente");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_moto_Marca_idMarca",
+                table: "moto",
+                column: "Marca_idMarca");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_moto_Modelo_idModelo",
+                table: "moto",
+                column: "Modelo_idModelo");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_moto_Veiculo_idVeiculo",
+                table: "moto",
                 column: "Veiculo_idVeiculo");
 
             migrationBuilder.CreateIndex(
@@ -259,13 +387,19 @@ namespace Estacionamento.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "caminhonete");
+
+            migrationBuilder.DropTable(
+                name: "moto");
+
+            migrationBuilder.DropTable(
                 name: "notafiscal");
 
             migrationBuilder.DropTable(
                 name: "ticket");
 
             migrationBuilder.DropTable(
-                name: "Carro");
+                name: "carro");
 
             migrationBuilder.DropTable(
                 name: "periodo");

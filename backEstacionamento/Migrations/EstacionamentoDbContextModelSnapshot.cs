@@ -16,6 +16,49 @@ namespace Estacionamento.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.11");
 
+            modelBuilder.Entity("Caminhonete", b =>
+                {
+                    b.Property<int>("_idCarro")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Cliente_idCliente")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Marca_idMarca")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Modelo_idModelo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Veiculo_idVeiculo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("_idCliente")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("_idMarca")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("_idModelo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("_idVeiculo")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("_idCarro");
+
+                    b.HasIndex("Cliente_idCliente");
+
+                    b.HasIndex("Marca_idMarca");
+
+                    b.HasIndex("Modelo_idModelo");
+
+                    b.HasIndex("Veiculo_idVeiculo");
+
+                    b.ToTable("caminhonete");
+                });
+
             modelBuilder.Entity("Carro", b =>
                 {
                     b.Property<int>("_idCarro")
@@ -56,7 +99,7 @@ namespace Estacionamento.Migrations
 
                     b.HasIndex("Veiculo_idVeiculo");
 
-                    b.ToTable("Carro");
+                    b.ToTable("carro");
                 });
 
             modelBuilder.Entity("Cliente", b =>
@@ -125,6 +168,49 @@ namespace Estacionamento.Migrations
                     b.ToTable("modelo");
                 });
 
+            modelBuilder.Entity("Moto", b =>
+                {
+                    b.Property<int>("_idMoto")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Cliente_idCliente")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Marca_idMarca")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Modelo_idModelo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Veiculo_idVeiculo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("_idCliente")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("_idMarca")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("_idModelo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("_idVeiculo")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("_idMoto");
+
+                    b.HasIndex("Cliente_idCliente");
+
+                    b.HasIndex("Marca_idMarca");
+
+                    b.HasIndex("Modelo_idModelo");
+
+                    b.HasIndex("Veiculo_idVeiculo");
+
+                    b.ToTable("moto");
+                });
+
             modelBuilder.Entity("NotaFiscal", b =>
                 {
                     b.Property<int>("_idNota")
@@ -144,7 +230,6 @@ namespace Estacionamento.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<int>("_idCliente")
-                        .IsRequired()
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("_idServico")
@@ -251,7 +336,77 @@ namespace Estacionamento.Migrations
                     b.ToTable("veiculo");
                 });
 
+            modelBuilder.Entity("Caminhonete", b =>
+                {
+                    b.HasOne("Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("Cliente_idCliente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Marca", "Marca")
+                        .WithMany()
+                        .HasForeignKey("Marca_idMarca")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Modelo", "Modelo")
+                        .WithMany()
+                        .HasForeignKey("Modelo_idModelo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Veiculo", "Veiculo")
+                        .WithMany()
+                        .HasForeignKey("Veiculo_idVeiculo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Marca");
+
+                    b.Navigation("Modelo");
+
+                    b.Navigation("Veiculo");
+                });
+
             modelBuilder.Entity("Carro", b =>
+                {
+                    b.HasOne("Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("Cliente_idCliente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Marca", "Marca")
+                        .WithMany()
+                        .HasForeignKey("Marca_idMarca")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Modelo", "Modelo")
+                        .WithMany()
+                        .HasForeignKey("Modelo_idModelo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Veiculo", "Veiculo")
+                        .WithMany()
+                        .HasForeignKey("Veiculo_idVeiculo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Marca");
+
+                    b.Navigation("Modelo");
+
+                    b.Navigation("Veiculo");
+                });
+
+            modelBuilder.Entity("Moto", b =>
                 {
                     b.HasOne("Cliente", "Cliente")
                         .WithMany()
