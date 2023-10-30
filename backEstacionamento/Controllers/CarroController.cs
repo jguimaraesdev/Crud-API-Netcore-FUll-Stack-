@@ -16,7 +16,7 @@ public class CarroController : ControllerBase
     [Route("listar")]
     public async Task<ActionResult<IEnumerable<Carro>>> Listar()
     {
-        if (_context.carro is null) return NotFound();
+        if (_context.caminhonete is null) return NotFound();
         return await _context.carro.ToListAsync();
     }
 
