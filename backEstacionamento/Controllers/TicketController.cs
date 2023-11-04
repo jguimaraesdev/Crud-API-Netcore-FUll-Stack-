@@ -27,9 +27,10 @@ using Microsoft.EntityFrameworkCore;
 
             [HttpGet()]
             [Route("listarticket")]
-            public async Task<ActionResult<IEnumerable<Ticket>>> GetListarAsync()
+            public async Task<ActionResult<IEnumerable<Ticket>>> Listar()
             {
-                if (_context.ticket is null) return NotFound();
+                if (_context is null) return BadRequest();
+                if (_context.ticket is null) return BadRequest();
                 return await _context.ticket.ToListAsync();
             }
 
@@ -37,23 +38,27 @@ using Microsoft.EntityFrameworkCore;
             //--------------------------------------------------------------------//
 
             [HttpGet()]
-            [Route("buscar/{Placa}")]
-            public async Task<ActionResult<Ticket>> Buscar([FromRoute] String placa)
+            [Route("buscar/{COD}")]
+            public async Task<ActionResult<Ticket>> Buscar(int COD)
             {
-                if (_context.ticket is null) return NotFound();
-                var ticket = await _context.ticket.FirstOrDefaultAsync(x => x.Carro.Veiculo._Placa ==placa );
-                return ticket;
+                if (_context is null) return BadRequest();
+                if (_context.ticket is null) return BadRequest();
+                var tickettemp = await _context.ticket.FirstOrDefaultAsync(X =>X._codTicket == COD);
+                if (tickettemp is null) return BadRequest();
+                return tickettemp;
             }
 
 
             //--------------------------------------------------------------------//
             [HttpPost()]
             [Route("cadastrar")]
-            public async Task<IActionResult> Cadastrar(Ticket newticket)
+            public async Task<IActionResult> Cadastrar(Ticket newTicket)
             {
-                await _context.ticket.AddAsync(newticket);
+                if (_context is null) return BadRequest();
+                if(_context.ticket is null) return BadRequest();
+                await _context.AddAsync(newTicket);
                 await _context.SaveChangesAsync();
-                return Created("",newticket);
+                return Created("",newTicket);
             }
             
 
@@ -62,11 +67,13 @@ using Microsoft.EntityFrameworkCore;
 
             [HttpPut]
             [Route("alterar")]
-            public async Task<IActionResult> Alterar(Ticket inputticket)
+            public async Task<IActionResult> Alterar(Ticket inputTicket)
             {
-                //var novo = new Ticket(id, codticket, true);
-
-                _context.ticket.Update(inputticket);
+                if (_context is null) return BadRequest();
+                if (_context.ticket is null) return BadRequest();
+                var tickettemp = await _context.ticket.FindAsync(inputTicket._codTicket);
+                if (tickettemp is null) return BadRequest();
+                tickettemp._codTicket = inputTicket._codTicket;
                 await _context.SaveChangesAsync();
                 return Ok();
             }
@@ -75,11 +82,13 @@ using Microsoft.EntityFrameworkCore;
 
             [HttpDelete]
             [Route("excluir/{COD}")]
-            public async Task<IActionResult> Excluir([FromRoute] int codTicket)
+            public async Task<IActionResult> Excluir(int codTicket)
             {
-                var ticket = await _context.ticket.FindAsync(codTicket);
-                if (ticket is null) return NotFound();
-                _context.ticket.Remove(ticket);
+                if (_context is null) return BadRequest();
+                if (_context.ticket is null) return BadRequest();
+                var ticketemp = await _context.ticket.FindAsync(codTicket);
+                if (ticketemp is null) return NotFound();
+                _context.Remove(ticketemp);
                 await _context.SaveChangesAsync();
                 return Ok();
             }

@@ -25,22 +25,25 @@ using Microsoft.EntityFrameworkCore;
 
         [HttpGet]
         [Route("listar")]
-        public async Task<ActionResult<IEnumerable<Servico>>> GetListarAsync()
+        public async Task<ActionResult<IEnumerable<Servico>>> Listar()
 
         {
-            if (_context.servico is null) return NotFound();
+            if (_context is null) return BadRequest();
+            if (_context.servico is null) return BadRequest();
             return await _context.servico.ToListAsync();
 
         }
 
-
+        //--------------------------------------------------------------------//
 
         [HttpGet()]
-        [Route("buscar/{descricao}")]
-        public async Task<ActionResult<Servico>> Buscar([FromRoute] string descricao)
+        [Route("buscar/{id}")]
+        public async Task<ActionResult<Servico>> Buscar(int id)
         {
-            if (_context.servico is null) return NotFound();
-            var servico1 = await _context.servico.FirstOrDefaultAsync(x => x._descricaoServico == descricao );//forçar a procura por string
+            if (_context is null) return BadRequest();
+            if (_context.servico is null) return BadRequest();
+            var servico1 = await _context.servico.FindAsync(id);
+            if (servico1 is null) return BadRequest();
             return servico1;
         }
 
@@ -51,9 +54,11 @@ using Microsoft.EntityFrameworkCore;
         [Route("cadastrar")]
         public async Task<IActionResult> Cadastrar(Servico newservico)
         {
-            await _context.servico.AddAsync(newservico);
+             if (_context is null) return BadRequest();
+            await _context.AddAsync(newservico);
             await _context.SaveChangesAsync();
-        return Created("",newservico);
+            return Created("",newservico);
+            
         }
 
         //--------------------------------------------------------------------//
@@ -62,20 +67,68 @@ using Microsoft.EntityFrameworkCore;
         [Route("alterar")]
         public async Task<IActionResult> Alterar(Servico servico)
         {
-            _context.servico.Update(servico);
+            if (_context is null) return BadRequest();
+            if (_context.servico is null) return BadRequest();
+            var servicotemp = await _context.servico.FindAsync(servico._OrdemServico);
+            if (servicotemp is null) return BadRequest();
+            servicotemp = servico;
             await _context.SaveChangesAsync();
+            
             return Ok();
         }
 
 
         //--------------------------------------------------------------------//
-        [HttpDelete]
-        [Route("excluir/{servico}")]
-        public async Task<IActionResult> excluir(int idservico)
+
+       
+
+        [HttpPut]
+        [Route("update/ValorServico")]
+        public async Task<IActionResult> UpdateValorServico(int ordemservico, double valor)
         {
-            var servico = await _context.servico.FindAsync(idservico);
-            if (_context.servico is null) return NotFound();
-            _context.servico.Remove(servico);
+            if (_context is null) return BadRequest();
+            if (_context.servico is null) return BadRequest();
+            var servicotemp = await _context.servico.FirstOrDefaultAsync(x =>x._OrdemServico == ordemservico);
+            if (servicotemp is null) return BadRequest();
+            	
+            servicotemp._valorServico = valor;
+            
+            await _context.SaveChangesAsync();
+            
+            return Ok();
+        }
+
+
+        //--------------------------------------------------------------------//
+
+        
+
+        [HttpPut]
+        [Route("update/ValorPagar")]
+        public async Task<IActionResult> UpdateValorPagar(int ordemservico, double valor)
+        {
+            if (_context is null) return BadRequest();
+            if (_context.servico is null) return BadRequest();
+            var servicotemp = await _context.servico.FirstOrDefaultAsync(x =>x._OrdemServico == ordemservico);
+            if (servicotemp is null) return BadRequest();
+            servicotemp._valorPagar = valor;
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+
+        
+
+        //--------------------------------------------------------------------//
+        [HttpDelete]
+        [Route("excluir/{ordemServico}")]
+        public async Task<IActionResult> excluir(int ordemServico)
+        {
+            if (_context is null) return BadRequest();
+            if (_context.servico is null) return BadRequest();
+            var servico = await _context.servico.FindAsync(ordemServico);
+            if (servico is null) return BadRequest();
+            _context.Remove(servico);
             await _context.SaveChangesAsync();
             return Ok();
         }

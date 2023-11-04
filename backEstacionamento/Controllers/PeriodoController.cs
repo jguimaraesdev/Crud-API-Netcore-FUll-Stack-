@@ -29,10 +29,11 @@ public class PeriodoController : ControllerBase
 
     [HttpGet]
     [Route("listar")]
-    public async Task<ActionResult<IEnumerable<Periodo>>> GetListarAsync()
+    public async Task<ActionResult<IEnumerable<Periodo>>> Listar()
 
-    {
-        if (_context.periodo is null) return NotFound();
+    {   
+        if (_context is null) return BadRequest();
+        if (_context.periodo is null) return BadRequest();
         return await _context.periodo.ToListAsync();
 
     }
@@ -40,11 +41,13 @@ public class PeriodoController : ControllerBase
 
 
     [HttpGet()]
-    [Route("buscar/{periodo}")]
-    public async Task<ActionResult<Periodo>> Buscar([FromRoute] int idperiodo)
+    [Route("buscar/{placa}")]
+    public async Task<ActionResult<Periodo>> Buscar(String placa)
     {
-        if (_context.periodo is null) return NotFound();
-        var periodo = await _context.periodo.FindAsync(idperiodo);
+        if (_context is null) return BadRequest();
+        if (_context.periodo is null) return BadRequest();
+        var periodo = await _context.periodo.FirstOrDefaultAsync(x => x._Placa == placa);
+        if (periodo is null) return BadRequest();
         return periodo;
     }
 
@@ -52,34 +55,63 @@ public class PeriodoController : ControllerBase
 
 
     [HttpPost()]
-    [Route("cadastrar")]
+    [Route("cadastrar/entrada")]
     public async Task<IActionResult> Cadastrar(Periodo periodo)
     {
-        await _context.periodo.AddAsync(periodo);
+        if (_context is null) return BadRequest();
+        await _context.AddAsync(periodo);
         await _context.SaveChangesAsync();
+        updateEntrada(periodo._Placa);//para inserir a data de entrada automaticamente
         return Created("",periodo);
+        
     }
 
     //--------------------------------------------------------------------//
-
+    //ESSE ESTA PRIVADO, POIS JÁ ESTA SENDO CHAMADO NA HORA DO CADASTRO PARA ATUALIZAR A ENTRADA;
+    
     [HttpPut]
-    [Route("alterar")]
-    public async Task<IActionResult> Alterar(Periodo periodo)
+    [Route("update/entrada")]
+    private async Task<IActionResult> updateEntrada(String placa)
     {
-        _context.periodo.Update(periodo);
+        if (_context is null) return BadRequest();
+        if (_context.periodo is null) return BadRequest();
+        var periodotemp = await _context.periodo.FirstOrDefaultAsync(x => x._Placa == placa);
+        if (periodotemp is null) return BadRequest();
+        periodotemp._HoraEntrada = DateTime.Now;
         await _context.SaveChangesAsync();
         return Ok();
     }
 
 
     //--------------------------------------------------------------------//
-    [HttpDelete]
-    [Route("excluir/{Periodo}")]
-    public async Task<IActionResult> excluir(int idperiodo)
+
+    
+
+    [HttpPut]
+    [Route("update/saida")]
+    public async Task<IActionResult> updateSaida(String placa)
     {
-        var periodo = await _context.periodo.FindAsync(idperiodo);
-        if (_context.periodo is null) return NotFound();
-        _context.periodo.Remove(periodo);
+        if (_context is null) return BadRequest();
+        if (_context.periodo is null) return BadRequest();
+        var periodotemp = await _context.periodo.FirstOrDefaultAsync(x => x._Placa == placa);
+        if (periodotemp is null) return BadRequest();
+        periodotemp._HoraSaida = DateTime.Now;
+        await _context.SaveChangesAsync();
+        return Ok();
+    }
+
+
+    //--------------------------------------------------------------------//
+
+    [HttpDelete]
+    [Route("excluir/{periodo}")]
+    public async Task<IActionResult> excluir(string placa)
+    {
+        if (_context is null) return BadRequest();
+        if (_context.periodo is null) return BadRequest();
+        var periodotemp = await _context.periodo.FirstOrDefaultAsync(x => x._Placa == placa);
+        if (periodotemp is null) return NotFound();
+        _context.Remove(periodotemp);
         await _context.SaveChangesAsync();
         return Ok();
     }

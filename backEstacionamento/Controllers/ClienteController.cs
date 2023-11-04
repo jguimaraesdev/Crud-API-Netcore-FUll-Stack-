@@ -6,58 +6,80 @@ using Microsoft.EntityFrameworkCore;
 [Route("[controller]")]
 public class ClienteController : ControllerBase
 {
-    private EstacionamentoDbContext _context;
+    private EstacionamentoDbContext _dbContext;
     public ClienteController(EstacionamentoDbContext context)
     {
-        _context = context;
+        _dbContext = context;
     }
 
-    [HttpGet()]
+    //--------------------------------------------------------------------//
+
+    [HttpGet]
     [Route("listar")]
     public async Task<ActionResult<IEnumerable<Cliente>>> Listar()
     {
-        if (_context.cliente is null) return NotFound();
-        return await _context.cliente.ToListAsync();
+        if(_dbContext is null) return BadRequest();
+        if(_dbContext.cliente is null) return BadRequest();
+        return await _dbContext.cliente.ToListAsync();
     }
 
-    [HttpGet()]
+     //--------------------------------------------------------------------//
+
+    [HttpGet]
     [Route("buscar/{cpf}")]
-    public async Task<ActionResult<Cliente>> Buscar([FromRoute] string Cpf)
+    public async Task<ActionResult<Cliente>> Buscar(string cpf)
     {
-        if (_context.cliente is null) return NotFound();
-        var cliente = await _context.cliente.FindAsync(Cpf);
-        return cliente;
+        if(_dbContext is null) return BadRequest();
+        if(_dbContext.cliente is null) return BadRequest();
+        var clienteTemp = await _dbContext.cliente.FindAsync(cpf);
+        if(clienteTemp is null) return BadRequest();
+        return clienteTemp;
     }
 
-    [HttpPost()]
+     //--------------------------------------------------------------------//
+
+    [HttpPost]
     [Route("cadastrar")]
-    public async Task<IActionResult> Cadastrar(Cliente cliente)
+    public async Task<ActionResult> Cadastrar(Cliente cliente)
     {
-        await _context.AddAsync(cliente);
-        await _context.SaveChangesAsync();
-        return Created("", cliente);
+        if(_dbContext is null) return BadRequest();
+        await _dbContext.AddAsync(cliente);
+        await _dbContext.SaveChangesAsync();
+        return Created("",cliente);
     }
 
-    [HttpPut]
+     //--------------------------------------------------------------------//
+
+    [HttpPut()]
     [Route("alterar")]
-    public async Task<IActionResult> Alterar(Cliente cliente)
+    public async Task<ActionResult> Alterar(Cliente cliente)
     {
-        _context.cliente.Update(cliente);
-        await _context.SaveChangesAsync();
+        if(_dbContext is null) return BadRequest();
+        if(_dbContext.cliente is null) return BadRequest();
+        var clienteTemp = await _dbContext.cliente.FindAsync(cliente._Cpf);
+        if(clienteTemp is null) return BadRequest();
+        clienteTemp._Nome = cliente._Nome;
+        await _dbContext.SaveChangesAsync();
         return Ok();
     }
 
-    [HttpDelete]
+     //--------------------------------------------------------------------//
+
+    [HttpDelete()]
     [Route("excluir/{cpf}")]
-    public async Task<IActionResult> excluir(int Id)
+    public async Task<ActionResult> Excluir(string cpf)
     {
-        var cliente = await _context.cliente.FindAsync(Id);
-        if (_context.cliente is null) return NotFound();
-        _context.cliente.Remove(cliente);
-        await _context.SaveChangesAsync();
+        if(_dbContext is null) return BadRequest();
+        if(_dbContext.cliente is null) return BadRequest();
+        var clienteTemp = await _dbContext.cliente.FindAsync(cpf);
+        if(clienteTemp is null) return BadRequest();
+        _dbContext.Remove(clienteTemp);
+        await _dbContext.SaveChangesAsync();
         return Ok();
     }
 
+     //--------------------------------------------------------------------//
+    /*
     [HttpPatch]
     [Route("modificaremail/{cpf}")]
     public async Task<IActionResult> ModificarEmail(string Cpf, [FromForm] string newEmail)
@@ -69,5 +91,5 @@ public class ClienteController : ControllerBase
         return Ok();
     }
 
-   
+   */
 }

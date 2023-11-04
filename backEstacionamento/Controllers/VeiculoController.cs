@@ -12,22 +12,31 @@ public class VeiculoController : ControllerBase
         _context = context;
     }
 
+    //--------------------------------------------------------------------//
+
     [HttpGet()]
     [Route("listar")]
     public async Task<ActionResult<IEnumerable<Veiculo>>> Listar()
     {
-        if (_context.veiculo is null) return NotFound();
+        if (_context is null) return BadRequest();
+        if (_context.veiculo is null) return BadRequest();
         return await _context.veiculo.ToListAsync();
     }
+
+    //--------------------------------------------------------------------//
 
     [HttpGet()]
     [Route("buscar/{placa}")]
     public async Task<ActionResult<Veiculo>> Buscar([FromRoute] string placa)
     {
-        if (_context.veiculo is null) return NotFound();
-        var veiculo = await _context.veiculo.FindAsync(placa);
-        return veiculo;
+        if (_context is null) return BadRequest();
+        if (_context.veiculo is null) return BadRequest();
+        var veiculotemp = await _context.veiculo.FindAsync(placa);
+        if(veiculotemp is null) return BadRequest();
+        return veiculotemp;
     }
+
+    //--------------------------------------------------------------------//
 
     [HttpPost()]
     [Route("cadastrar")]
@@ -38,26 +47,38 @@ public class VeiculoController : ControllerBase
         return Created("", veiculo);
     }
 
+    //--------------------------------------------------------------------//
+
     [HttpPut]
     [Route("alterar")]
     public async Task<IActionResult> Alterar(Veiculo veiculo)
     {
-        _context.veiculo.Update(veiculo);
+        if(_context is null) return BadRequest();
+        if(_context.veiculo is null) return BadRequest();
+        var veiculoTemp = await _context.veiculo.FindAsync(veiculo._Placa);
+        if(veiculoTemp is null) return BadRequest();
+        veiculoTemp._nomeModelo = veiculo._nomeModelo;
+        veiculoTemp._Descricao = veiculo._Descricao;
         await _context.SaveChangesAsync();
         return Ok();
     }
+    
+    //--------------------------------------------------------------------//
 
     [HttpDelete]
     [Route("excluirveiculo/{placa}")]
     public async Task<IActionResult> excluir(string placa)
     {
-        var veiculo = await _context.veiculo.FindAsync(placa);
-        if (_context.veiculo is null) return NotFound();
-        _context.veiculo.Remove(veiculo);
+        if(_context is null) return BadRequest();
+        if(_context.veiculo is null) return BadRequest();
+        var veiculo = await _context.veiculo.FirstOrDefaultAsync(x => x._Placa == placa);
+        if (veiculo is null) return BadRequest();
+        _context.Remove(veiculo);
         await _context.SaveChangesAsync();
         return Ok();
     }
-
+    //--------------------------------------------------------------------//
+    /*
     [HttpPatch]
     [Route("modificardescricao/{placa}")]
     public async Task<IActionResult> ModificarDescricao(string placa, [FromForm] string Descricao)
@@ -68,4 +89,6 @@ public class VeiculoController : ControllerBase
         await _context.SaveChangesAsync();
         return Ok();
     }
+
+    */
 }

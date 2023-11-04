@@ -5,21 +5,21 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 public class Ticket
 {   
     [Key]
-    public int _idTicket {get; set;}
-    public  int _codTicket {get; set;}
-
-    public int _idCarro {get; set;}//atributo para inserir dado no banco
-    public int _idPeriodo{get;set;}
-    public int _Servico {get;set;}
+    public  int? _codTicket {get; set;}
+    public string? _Placa {get; set;}
+    
+    
     //-------------------------------------------------------------------------
 
-    public Carro Carro {get;set;}
-    public Periodo Periodo {get;set;}
-    public Servico Servico {get;set;}
+    private Veiculo? Veiculo {get;set;}
+    private Periodo? Periodo {get;set;}
+    
 
     //-------------------------------------------------------------------------
 
+    private List<Servico>? Servico{get;set;}
 
+    
 
 
 }

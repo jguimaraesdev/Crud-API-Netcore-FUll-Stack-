@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http'; 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule} from 'ngx-bootstrap/modal';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
-import { CarrosService } from './carros.service';
-import { CarrosComponent } from './carros.component';
+
+import { VeiculosService } from 'src/app/veiculos.service';
+import { VeiculosComponent } from './components/veiculos/veiculos.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    CarrosComponent
+    VeiculosComponent
   ],
   imports: [
     BrowserModule,
@@ -24,9 +24,13 @@ import { CarrosComponent } from './carros.component';
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BrowserAnimationsModule
   ],
-  providers: [HttpClientModule, CarrosService],
+  providers: [
+    HttpClientModule, 
+    VeiculosService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
