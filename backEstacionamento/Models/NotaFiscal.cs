@@ -6,16 +6,16 @@ public class NotaFiscal
     
     public string? _NumeroNota { get; set; }
     public double? _ValorDaNota { get; set; }
-    public int? _Cpf{  get; set; }
-    public int? _OrdemServico {  get; set; }
+    public String? _Cpf{  get; set; }
+    public int? _idServico {  get; set; }
     
 
     //-------------------------------------------------------------------------
-    private Cliente? Cliente { get; set; }
-    private Servico? Servico{get;set;}
+    public Cliente? Cliente { get; set; }
+    public Servico? Servico{get;set;}
     //-------------------------------------------------------------------------
 
-    private List<Servico>? Servicos {get;set;}
+    public List<Servico>? Servicos {get;set;}
     
 
     //-------------------------------------------------------------------------

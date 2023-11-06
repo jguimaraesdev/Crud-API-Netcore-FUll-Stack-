@@ -1,17 +1,25 @@
+import { Modelo } from "./Modelo";
+
 export class Veiculo
 {
     
-    _Placa: String = "";
-    _Descricao: String = "";
+    _Placa: string="";
+    _Descricao: string="";
+    _Cor: string = "";
     _idModelo: number = 0;
-    _CorExterna: number = 0;
-
-}
-/*
- public string? _Placa {get; set;}
-    public string? _Descricao {get; set;}
-    public int _idModelo{get; set;}
+    _Modelo:  Modelo |undefined;
     
-    public enum Cor {Vermelho, Branco, Preto, Prata}
-    public Cor _CorExterna {get; set;}
-     */
+    //-------------------------------------------------------------------------
+    
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,63 @@
+<div class="container p-5">
+    <div class="row">
+      <div class="col-6 border border-light rounded p-5 shadow" *ngIf="formulario">
+        <h6>{{ tituloFormulario }}</h6>
+        <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
+          <div class="form-group">
+            <label>Nome Modelo</label>
+            <input type="text" class="form-control form-control-sm" 
+            formControlName="_nomeModelo"/>
+          </div>
+          <div class="form-group">
+            <label>Motor</label>
+            <input type="text" class="form-control form-control-sm" 
+            formControlName="_motor"/>
+          </div>
+          <div class="form-group">
+            <label>Quantidade Portas</label>
+            <input type="text" class="form-control form-control-sm" 
+            formControlName="_qtdPortas"/>
+          </div>
+          <div class="form-group">
+            <label>Ano Modelo</label>
+            <input type="text" class="form-control form-control-sm" 
+            formControlName="_AnoModelo"/>
+          </div>
+          <div class="form-group">
+            <label>Nome Marca</label>
+            <select class="form-control form-control-sm" formControlName="_idMarca">
+              <option *ngFor="let marca of marcas" [value]="marca._idMarca">
+                {{ marca._nomeMarca }}
+              </option>
+            </select>
+          </div>
+          <div class="form-action">
+            <label for="_TipoModelo">Selecione o Tipo:</label>
+            <select class="form-control" id="_TipoModelo">
+              <option value="Hatch">Hatch</option>
+              <option value="Sedã">Sedã</option>
+              <option value="Suv">Suv</option>
+              <option value="Picape">Picape</option>
+              <option value="Perua">Perua</option>
+              <option value="Minivan">Minivan</option>
+              <option value="Esportivo">Esportivo</option>
+              <option value="Furgão">Furgão</option>
+            </select>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div>
+                <button type="submit" class="btn btn-sm btn-outline-secondary">
+                  Salvar
+                </button>
+              </div>
+              <div class="pl-1">
+                <button type="button" class="btn btn-sm btn-light">Voltar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+

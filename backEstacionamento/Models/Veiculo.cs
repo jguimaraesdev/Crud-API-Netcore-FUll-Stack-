@@ -8,28 +8,20 @@ public class Veiculo
 
     public string? _Placa {get; set;}
     public string? _Descricao {get; set;}
-    public string? _nomeModelo {get; set;}
-
-
-    public Cor _CorExterna { get; set; }
-
+    public String? _Cor { get; set; }
+    public int? _idModelo {get; set;}
     //-------------------------------------------------------------------------
-    private Modelo? Modelo {get; set;}
+    public Modelo? Modelo {get; set;}
     
     //-------------------------------------------------------------------------
-    private List<Cliente>? Clientes {get;set;}
-
-    private List<Servico>? Servicos{get;set;}
+    public List<Cliente>? Clientes {get;set;}
+    public List<Servico>? Servicos{get;set;}
+    public List<Periodo>? Periodos{get;set;}
+    public List<Ticket>? Tickets{get;set;}
     //-------------------------------------------------------------------------
-    public enum Cor 
-    {
-        Vermelho = 1, 
-        Branco = 2, 
-        Preto = 3, 
-        Prata = 4,
-    }
+ 
 
-    //-------------------------------------------------------------------------
+
 
 
 }

@@ -25,12 +25,12 @@ export class VeiculosService {
     return this.http.get<Veiculo>(url);
   }
 
-  cadastrar(Veiculo: Veiculo): Observable<any> {
+  cadastrar(veiculo: Veiculo): Observable<any> {
     const url = `${this.apiUrl}/cadastrar`;
     return this.http.post<Veiculo>(url, Veiculo, httpOptions);
   }
 
-  atualizar(Veiculo: Veiculo): Observable<any> {
+  alterar(veiculo: Veiculo): Observable<any> {
     const url = `${this.apiUrl}/alterar`;
     return this.http.put<Veiculo>(url, Veiculo, httpOptions);
   }

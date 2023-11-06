@@ -7,17 +7,14 @@ public class Ticket
     [Key]
     public  int? _codTicket {get; set;}
     public string? _Placa {get; set;}
-    
-    
-    //-------------------------------------------------------------------------
-
-    private Veiculo? Veiculo {get;set;}
-    private Periodo? Periodo {get;set;}
-    
+    public int? _idPeriodo{get;set;}
 
     //-------------------------------------------------------------------------
+    public Veiculo? Veiculo {get;set;}
+    public Periodo? Periodo{get;set;}
+    //-------------------------------------------------------------------------
 
-    private List<Servico>? Servico{get;set;}
+    public List<Servico>? Servicos{get;set;}
 
     
 

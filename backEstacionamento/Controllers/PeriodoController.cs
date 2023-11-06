@@ -41,12 +41,12 @@ public class PeriodoController : ControllerBase
 
 
     [HttpGet()]
-    [Route("buscar/{placa}")]
-    public async Task<ActionResult<Periodo>> Buscar(String placa)
+    [Route("buscar/{id}")]
+    public async Task<ActionResult<Periodo>> Buscar(int id)
     {
         if (_context is null) return BadRequest();
         if (_context.periodo is null) return BadRequest();
-        var periodo = await _context.periodo.FirstOrDefaultAsync(x => x._Placa == placa);
+        var periodo = await _context.periodo.FindAsync(id);
         if (periodo is null) return BadRequest();
         return periodo;
     }
@@ -55,15 +55,31 @@ public class PeriodoController : ControllerBase
 
 
     [HttpPost()]
-    [Route("cadastrar/entrada")]
+    [Route("cadastrar")]
     public async Task<IActionResult> Cadastrar(Periodo periodo)
     {
         if (_context is null) return BadRequest();
         await _context.AddAsync(periodo);
         await _context.SaveChangesAsync();
-        updateEntrada(periodo._Placa);//para inserir a data de entrada automaticamente
+        updateEntrada(periodo);//para inserir a data de entrada automaticamente
         return Created("",periodo);
         
+    }
+
+    //--------------------------------------------------------------------//
+
+    [HttpPut]
+    [Route("alterar")]
+    public async Task<IActionResult> Alterar(Periodo periodo)
+    {
+        if (_context is null) return BadRequest();
+        if (_context.periodo is null) return BadRequest();
+        var temp = await _context.periodo.FindAsync(periodo);
+        if (temp is null) return BadRequest();
+        temp._Placa = periodo._Placa;
+        
+        await _context.SaveChangesAsync();
+        return Ok();
     }
 
     //--------------------------------------------------------------------//
@@ -71,11 +87,11 @@ public class PeriodoController : ControllerBase
     
     [HttpPut]
     [Route("update/entrada")]
-    private async Task<IActionResult> updateEntrada(String placa)
+    private async Task<IActionResult> updateEntrada(Periodo periodo)
     {
         if (_context is null) return BadRequest();
         if (_context.periodo is null) return BadRequest();
-        var periodotemp = await _context.periodo.FirstOrDefaultAsync(x => x._Placa == placa);
+        var periodotemp = await _context.periodo.FirstOrDefaultAsync(x => x._Placa == periodo._Placa);
         if (periodotemp is null) return BadRequest();
         periodotemp._HoraEntrada = DateTime.Now;
         await _context.SaveChangesAsync();
@@ -104,12 +120,12 @@ public class PeriodoController : ControllerBase
     //--------------------------------------------------------------------//
 
     [HttpDelete]
-    [Route("excluir/{periodo}")]
-    public async Task<IActionResult> excluir(string placa)
+    [Route("excluir/{id}")]
+    public async Task<IActionResult> excluir(int id)
     {
         if (_context is null) return BadRequest();
         if (_context.periodo is null) return BadRequest();
-        var periodotemp = await _context.periodo.FirstOrDefaultAsync(x => x._Placa == placa);
+        var periodotemp = await _context.periodo.FindAsync(id);
         if (periodotemp is null) return NotFound();
         _context.Remove(periodotemp);
         await _context.SaveChangesAsync();

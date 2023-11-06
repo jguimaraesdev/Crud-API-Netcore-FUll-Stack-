@@ -1,0 +1,48 @@
+<div class="container p-5">
+    <div class="row">
+      <div class="col-6 border border-light rounded p-5 shadow" *ngIf="formulario">
+        <h6>{{ tituloFormulario }}</h6>
+        <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
+          <div class="form-group">
+            <label>Codigo Servico</label>
+            <input type="text" class="form-control form-control-sm" 
+            formControlName="_idServico"/>
+          </div>
+          <div class="form-group">
+            <label> Codigo Ticket</label>
+            <select class="form-control form-control-sm" formControlName="_codTicket">
+              <option *ngFor="let ticket of tickets" [value]="ticket._Placa">
+                {{ ticket._Placa }}
+              </option>
+            </select>
+        </div>
+        <div class="form-action">
+            <label for="_TipoModelo">Selecione o Tipo:</label>
+            <select class="form-control" id="_TipoServico">
+              <option value="Estacionamento">Estacionamento</option>
+              <option value="Estetica">Estetica</option>
+              <option value="Higienizacao">Higienizacao</option>
+              <option value="Fornecedores">Fornecedores</option>
+            </select>
+          </div>
+        <div class="form-group">
+            <label>Valor Servico</label>
+            <input type="text" class="form-control form-control-sm" 
+            formControlName="_valorServico"/>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div>
+                <button type="submit" class="btn btn-sm btn-outline-secondary">
+                  Salvar
+                </button>
+              </div>
+              <div class="pl-1">
+                <button type="button" class="btn btn-sm btn-light">Voltar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>

@@ -57,7 +57,7 @@ public class MarcaController : ControllerBase
     {
         if (_dbContext is null) return BadRequest();
         if (_dbContext.marca is null) return BadRequest();
-        var marcaTemp = await _dbContext.marca.FindAsync(marca._nomeMarca);
+        var marcaTemp = await _dbContext.marca.FindAsync(marca._idMarca);
         if (marcaTemp is null) return BadRequest();
         marcaTemp._nomeMarca = marca._nomeMarca;
         await _dbContext.SaveChangesAsync();

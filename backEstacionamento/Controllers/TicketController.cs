@@ -26,7 +26,7 @@ using Microsoft.EntityFrameworkCore;
 
 
             [HttpGet()]
-            [Route("listarticket")]
+            [Route("listar")]
             public async Task<ActionResult<IEnumerable<Ticket>>> Listar()
             {
                 if (_context is null) return BadRequest();
@@ -38,12 +38,12 @@ using Microsoft.EntityFrameworkCore;
             //--------------------------------------------------------------------//
 
             [HttpGet()]
-            [Route("buscar/{COD}")]
-            public async Task<ActionResult<Ticket>> Buscar(int COD)
+            [Route("buscar/{id}")]
+            public async Task<ActionResult<Ticket>> Buscar(int id)
             {
                 if (_context is null) return BadRequest();
                 if (_context.ticket is null) return BadRequest();
-                var tickettemp = await _context.ticket.FirstOrDefaultAsync(X =>X._codTicket == COD);
+                var tickettemp = await _context.ticket.FirstOrDefaultAsync(X =>X._codTicket == id);
                 if (tickettemp is null) return BadRequest();
                 return tickettemp;
             }
@@ -81,12 +81,12 @@ using Microsoft.EntityFrameworkCore;
             //--------------------------------------------------------------------//
 
             [HttpDelete]
-            [Route("excluir/{COD}")]
-            public async Task<IActionResult> Excluir(int codTicket)
+            [Route("excluir/{id}")]
+            public async Task<IActionResult> Excluir(int id)
             {
                 if (_context is null) return BadRequest();
                 if (_context.ticket is null) return BadRequest();
-                var ticketemp = await _context.ticket.FindAsync(codTicket);
+                var ticketemp = await _context.ticket.FindAsync(id);
                 if (ticketemp is null) return NotFound();
                 _context.Remove(ticketemp);
                 await _context.SaveChangesAsync();

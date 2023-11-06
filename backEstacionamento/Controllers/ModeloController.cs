@@ -60,7 +60,7 @@ public class ModeloController : ControllerBase
     {
         if(_dbContext is null) return BadRequest();
         if(_dbContext.modelo is null) return BadRequest();
-        var modeloTemp = await _dbContext.modelo.FindAsync(modelo._nomeModelo);
+        var modeloTemp = await _dbContext.modelo.FindAsync(modelo._idMarca);
         if(modeloTemp is null) return BadRequest();
         modeloTemp._nomeModelo = modelo._nomeModelo;
         await _dbContext.SaveChangesAsync();

@@ -9,7 +9,7 @@ public class Cliente
     public string? _Email {get; set;}
 
     //-------------------------------------------------------------------------
-    private List<Veiculo>? Veiculo{get;set;}
+    public List<Veiculo>? Veiculos{get;set;}
 
-    private List<NotaFiscal>? Nota{get;set;}
+    public List<NotaFiscal>? NotaFiscais{get;set;}
 }

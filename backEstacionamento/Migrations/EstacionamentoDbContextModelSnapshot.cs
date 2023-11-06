@@ -32,37 +32,68 @@ namespace Estacionamento.Migrations
                     b.ToTable("cliente");
                 });
 
+            modelBuilder.Entity("ClienteVeiculo", b =>
+                {
+                    b.Property<string>("Clientes_Cpf")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Veiculos_Placa")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Clientes_Cpf", "Veiculos_Placa");
+
+                    b.HasIndex("Veiculos_Placa");
+
+                    b.ToTable("ClienteVeiculo");
+                });
+
             modelBuilder.Entity("Marca", b =>
                 {
+                    b.Property<int?>("_idMarca")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("_nomeMarca")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("_segmento")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("_segmento")
+                        .HasColumnType("TEXT");
 
-                    b.HasKey("_nomeMarca");
+                    b.HasKey("_idMarca");
 
                     b.ToTable("marca");
                 });
 
             modelBuilder.Entity("Modelo", b =>
                 {
-                    b.Property<string>("_nomeModelo")
+                    b.Property<int?>("idModelo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Marca_idMarca")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("_AnoModelo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("_TipoModelo")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("_TipoModelo")
+                    b.Property<int?>("_idMarca")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("_motor")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("_nomeMarca")
+                    b.Property<string>("_nomeModelo")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("_qtdPortas")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("_nomeModelo");
+                    b.HasKey("idModelo");
+
+                    b.HasIndex("Marca_idMarca");
 
                     b.ToTable("modelo");
                 });
@@ -72,23 +103,37 @@ namespace Estacionamento.Migrations
                     b.Property<string>("_NumeroNota")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("_Cpf")
+                    b.Property<string>("Cliente_Cpf")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Servico_idServico")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("_OrdemServico")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("_Cpf")
+                        .HasColumnType("TEXT");
 
                     b.Property<double?>("_ValorDaNota")
                         .HasColumnType("REAL");
 
+                    b.Property<int?>("_idServico")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("_NumeroNota");
+
+                    b.HasIndex("Cliente_Cpf");
+
+                    b.HasIndex("Servico_idServico");
 
                     b.ToTable("notafiscal");
                 });
 
             modelBuilder.Entity("Periodo", b =>
                 {
-                    b.Property<string>("_Placa")
+                    b.Property<int?>("_idPeriodo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Veiculo_Placa")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("_HoraEntrada")
@@ -97,30 +142,47 @@ namespace Estacionamento.Migrations
                     b.Property<DateTime?>("_HoraSaida")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("_Placa");
+                    b.Property<string>("_Placa")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("_idPeriodo");
+
+                    b.HasIndex("Veiculo_Placa");
 
                     b.ToTable("periodo");
                 });
 
             modelBuilder.Entity("Servico", b =>
                 {
-                    b.Property<int?>("_OrdemServico")
+                    b.Property<int?>("_idServico")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("_Placa")
+                    b.Property<string>("NotaFiscal_NumeroNota")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("_tipoServico")
+                    b.Property<int?>("Ticket_codTicket")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double?>("_valorPagar")
-                        .HasColumnType("REAL");
+                    b.Property<string>("Veiculo_Placa")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("_codTicket")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("_tipoServico")
+                        .HasColumnType("TEXT");
 
                     b.Property<double?>("_valorServico")
                         .HasColumnType("REAL");
 
-                    b.HasKey("_OrdemServico");
+                    b.HasKey("_idServico");
+
+                    b.HasIndex("NotaFiscal_NumeroNota");
+
+                    b.HasIndex("Ticket_codTicket");
+
+                    b.HasIndex("Veiculo_Placa");
 
                     b.ToTable("servico");
                 });
@@ -131,10 +193,23 @@ namespace Estacionamento.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("Periodo_idPeriodo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Veiculo_Placa")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("_Placa")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("_idPeriodo")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("_codTicket");
+
+                    b.HasIndex("Periodo_idPeriodo");
+
+                    b.HasIndex("Veiculo_Placa");
 
                     b.ToTable("ticket");
                 });
@@ -144,18 +219,138 @@ namespace Estacionamento.Migrations
                     b.Property<string>("_Placa")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("_CorExterna")
+                    b.Property<int?>("ModeloidModelo")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("_Cor")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("_Descricao")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("_nomeModelo")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("_idModelo")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("_Placa");
 
+                    b.HasIndex("ModeloidModelo");
+
                     b.ToTable("veiculo");
+                });
+
+            modelBuilder.Entity("ClienteVeiculo", b =>
+                {
+                    b.HasOne("Cliente", null)
+                        .WithMany()
+                        .HasForeignKey("Clientes_Cpf")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Veiculo", null)
+                        .WithMany()
+                        .HasForeignKey("Veiculos_Placa")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Modelo", b =>
+                {
+                    b.HasOne("Marca", "Marca")
+                        .WithMany()
+                        .HasForeignKey("Marca_idMarca");
+
+                    b.Navigation("Marca");
+                });
+
+            modelBuilder.Entity("NotaFiscal", b =>
+                {
+                    b.HasOne("Cliente", "Cliente")
+                        .WithMany("NotaFiscais")
+                        .HasForeignKey("Cliente_Cpf");
+
+                    b.HasOne("Servico", "Servico")
+                        .WithMany()
+                        .HasForeignKey("Servico_idServico");
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Servico");
+                });
+
+            modelBuilder.Entity("Periodo", b =>
+                {
+                    b.HasOne("Veiculo", "Veiculo")
+                        .WithMany("Periodos")
+                        .HasForeignKey("Veiculo_Placa");
+
+                    b.Navigation("Veiculo");
+                });
+
+            modelBuilder.Entity("Servico", b =>
+                {
+                    b.HasOne("NotaFiscal", null)
+                        .WithMany("Servicos")
+                        .HasForeignKey("NotaFiscal_NumeroNota");
+
+                    b.HasOne("Ticket", "Ticket")
+                        .WithMany("Servicos")
+                        .HasForeignKey("Ticket_codTicket");
+
+                    b.HasOne("Veiculo", "Veiculo")
+                        .WithMany("Servicos")
+                        .HasForeignKey("Veiculo_Placa");
+
+                    b.Navigation("Ticket");
+
+                    b.Navigation("Veiculo");
+                });
+
+            modelBuilder.Entity("Ticket", b =>
+                {
+                    b.HasOne("Periodo", "Periodo")
+                        .WithMany()
+                        .HasForeignKey("Periodo_idPeriodo");
+
+                    b.HasOne("Veiculo", "Veiculo")
+                        .WithMany("Tickets")
+                        .HasForeignKey("Veiculo_Placa");
+
+                    b.Navigation("Periodo");
+
+                    b.Navigation("Veiculo");
+                });
+
+            modelBuilder.Entity("Veiculo", b =>
+                {
+                    b.HasOne("Modelo", "Modelo")
+                        .WithMany()
+                        .HasForeignKey("ModeloidModelo");
+
+                    b.Navigation("Modelo");
+                });
+
+            modelBuilder.Entity("Cliente", b =>
+                {
+                    b.Navigation("NotaFiscais");
+                });
+
+            modelBuilder.Entity("NotaFiscal", b =>
+                {
+                    b.Navigation("Servicos");
+                });
+
+            modelBuilder.Entity("Ticket", b =>
+                {
+                    b.Navigation("Servicos");
+                });
+
+            modelBuilder.Entity("Veiculo", b =>
+                {
+                    b.Navigation("Periodos");
+
+                    b.Navigation("Servicos");
+
+                    b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618
         }

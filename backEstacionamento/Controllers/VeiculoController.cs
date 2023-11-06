@@ -57,8 +57,8 @@ public class VeiculoController : ControllerBase
         if(_context.veiculo is null) return BadRequest();
         var veiculoTemp = await _context.veiculo.FindAsync(veiculo._Placa);
         if(veiculoTemp is null) return BadRequest();
-        veiculoTemp._nomeModelo = veiculo._nomeModelo;
         veiculoTemp._Descricao = veiculo._Descricao;
+        veiculoTemp._Cor = veiculo._Cor;
         await _context.SaveChangesAsync();
         return Ok();
     }

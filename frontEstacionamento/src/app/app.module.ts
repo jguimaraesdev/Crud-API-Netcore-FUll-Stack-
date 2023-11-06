@@ -11,12 +11,33 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { VeiculosService } from 'src/app/veiculos.service';
 import { VeiculosComponent } from './components/veiculos/veiculos.component';
+import { ClientesService } from './clientes.service';
+import { ClientesComponent } from './components/clientes/clientes.component';
+import { MarcasService } from './marcas.service';
+import { MarcasComponent } from './components/marcas/marcas.component';
+import { ModelosService } from './modelos.service';
+import { ModelosComponent } from './components/modelos/modelos.component';
+import { PeriodosService} from './periodos.service';
+import { PeriodosComponent } from './components/periodos/periodos.component';
+import { TicketsService } from './tickets.service';
+import { TicketsComponent } from './components/tickets/tickets.component';
+import { ServicosService } from './servicos.service';
+import { ServicosComponent } from './components/servicos/servicos.component';
+import { NotaFiscalService } from './notas-fiscais.service';
+import { NotasFiscaisComponent } from './components/notas-fiscais/notas-fiscais.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    VeiculosComponent
+    VeiculosComponent,
+    ClientesComponent,
+    MarcasComponent,
+    ModelosComponent,
+    PeriodosComponent,
+    TicketsComponent,
+    ServicosComponent,
+    NotasFiscaisComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +50,14 @@ import { VeiculosComponent } from './components/veiculos/veiculos.component';
   ],
   providers: [
     HttpClientModule, 
-    VeiculosService
+    VeiculosService,
+    ClientesService,
+    MarcasService,
+    ModelosService,
+    PeriodosService,
+    TicketsService,
+    ServicosService,
+    NotaFiscalService
   ],
   bootstrap: [AppComponent]
 })
