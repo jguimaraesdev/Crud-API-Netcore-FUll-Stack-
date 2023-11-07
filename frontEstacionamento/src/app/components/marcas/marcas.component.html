@@ -5,11 +5,11 @@
         <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
             <div class="form-group">
               <label>Nome</label>
-              <input type="text" class="form-control form-control-sm" formControlName="Nome"/>
+              <input type="text" class="form-control form-control-sm" formControlName="_nomeMarca"/>
             </div>
             <div class="form-acion">
-                  <label for="_segmento">Selecione o Tipo:</label>
-                  <select class="form-control" id="_segmento">
+                  <label>Selecione o Tipo:</label>
+                  <select class="form-control" formControlName="_segmento">
                     <option value="Automóveis">Automóveis</option>
                     <option value="Motocicletas">Motocicletas</option>
                     <option value="Onibus">Onibus</option>

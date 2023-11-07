@@ -33,7 +33,6 @@ export class VeiculosComponent implements OnInit {
       
       _idVeiculo: new FormControl(null),
       _Placa: new FormControl(null),
-      _Descricao: new FormControl(null),
       _Cor: new FormControl(null),
       _idModelo: new FormControl(null)
       

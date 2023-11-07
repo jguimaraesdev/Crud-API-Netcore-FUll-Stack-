@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 [ApiController]
 [Route("[controller]")]
-public class ClienteController : ControllerBase
+public class ClienteVeiculoController : ControllerBase
 {
     private EstacionamentoDbContext _dbContext;
-    public ClienteController(EstacionamentoDbContext context)
+    public ClienteVeiculoController(EstacionamentoDbContext context)
     {
         _dbContext = context;
     }
@@ -16,22 +16,22 @@ public class ClienteController : ControllerBase
 
     [HttpGet]
     [Route("listar")]
-    public async Task<ActionResult<IEnumerable<Cliente>>> Listar()
+    public async Task<ActionResult<IEnumerable<ClienteVeiculo>>> Listar()
     {
         if(_dbContext is null) return BadRequest();
-        if(_dbContext.cliente is null) return BadRequest();
-        return await _dbContext.cliente.ToListAsync();
+        if(_dbContext.clienteVeiculo is null) return BadRequest();
+        return await _dbContext.clienteVeiculo.ToListAsync();
     }
 
      //--------------------------------------------------------------------//
 
     [HttpGet]
     [Route("buscar/{cpf}")]
-    public async Task<ActionResult<Cliente>> Buscar(string cpf)
+    public async Task<ActionResult<ClienteVeiculo>> Buscar(string cpf)
     {
         if(_dbContext is null) return BadRequest();
-        if(_dbContext.cliente is null) return BadRequest();
-        var clienteTemp = await _dbContext.cliente.FindAsync(cpf);
+        if(_dbContext.clienteVeiculo is null) return BadRequest();
+        var clienteTemp = await _dbContext.clienteVeiculo.FindAsync(cpf);
         if(clienteTemp is null) return BadRequest();
         return clienteTemp;
     }
@@ -40,7 +40,7 @@ public class ClienteController : ControllerBase
 
     [HttpPost]
     [Route("cadastrar")]
-    public async Task<ActionResult> Cadastrar(Cliente cliente)
+    public async Task<ActionResult> Cadastrar(ClienteVeiculo cliente)
     {
         if(_dbContext is null) return BadRequest();
         await _dbContext.AddAsync(cliente);
@@ -50,15 +50,17 @@ public class ClienteController : ControllerBase
 
      //--------------------------------------------------------------------//
 
-    [HttpPut()]
+
+     [HttpPut()]
     [Route("alterar")]
-    public async Task<ActionResult> Alterar(Cliente cliente)
+    public async Task<ActionResult> Alterar(ClienteVeiculo cliente)
     {
         if(_dbContext is null) return BadRequest();
-        if(_dbContext.cliente is null) return BadRequest();
-        var clienteTemp = await _dbContext.cliente.FindAsync(cliente._Cpf);
+        if(_dbContext.clienteVeiculo is null) return BadRequest();
+        var clienteTemp = await _dbContext.clienteVeiculo.FindAsync(cliente);
         if(clienteTemp is null) return BadRequest();
-        clienteTemp._Nome = cliente._Nome;
+        clienteTemp.Clientes_Cpf = cliente.Clientes_Cpf;
+        clienteTemp.Veiculos_Placa= cliente.Veiculos_Placa;
         await _dbContext.SaveChangesAsync();
         return Ok();
     }
@@ -71,26 +73,11 @@ public class ClienteController : ControllerBase
     public async Task<ActionResult> Excluir(string cpf)
     {
         if(_dbContext is null) return BadRequest();
-        if(_dbContext.cliente is null) return BadRequest();
-        var clienteTemp = await _dbContext.cliente.FindAsync(cpf);
+        if(_dbContext.clienteVeiculo is null) return BadRequest();
+        var clienteTemp = await _dbContext.clienteVeiculo.FindAsync(cpf);
         if(clienteTemp is null) return BadRequest();
         _dbContext.Remove(clienteTemp);
         await _dbContext.SaveChangesAsync();
         return Ok();
     }
-
-     //--------------------------------------------------------------------//
-    /*
-    [HttpPatch]
-    [Route("modificaremail/{cpf}")]
-    public async Task<IActionResult> ModificarEmail(string Cpf, [FromForm] string newEmail)
-    {
-        var cliente = await _context.cliente.FindAsync(Cpf);
-        if (_context.cliente is null) return NotFound();
-        cliente._Email = newEmail;
-        await _context.SaveChangesAsync();
-        return Ok();
-    }
-
-   */
 }

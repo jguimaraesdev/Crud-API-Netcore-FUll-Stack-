@@ -67,7 +67,6 @@ namespace Estacionamento.Migrations
                 columns: table => new
                 {
                     _Placa = table.Column<string>(type: "TEXT", nullable: false),
-                    _Descricao = table.Column<string>(type: "TEXT", nullable: true),
                     _Cor = table.Column<string>(type: "TEXT", nullable: true),
                     _idModelo = table.Column<int>(type: "INTEGER", nullable: true),
                     ModeloidModelo = table.Column<int>(type: "INTEGER", nullable: true)
@@ -83,7 +82,31 @@ namespace Estacionamento.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClienteVeiculo",
+                name: "clienteVeiculo",
+                columns: table => new
+                {
+                    Clientes_Cpf = table.Column<string>(type: "TEXT", nullable: false),
+                    Veiculos_Placa = table.Column<string>(type: "TEXT", nullable: true),
+                    Veiculo_Placa = table.Column<string>(type: "TEXT", nullable: true),
+                    Cliente_Cpf = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_clienteVeiculo", x => x.Clientes_Cpf);
+                    table.ForeignKey(
+                        name: "FK_clienteVeiculo_cliente_Cliente_Cpf",
+                        column: x => x.Cliente_Cpf,
+                        principalTable: "cliente",
+                        principalColumn: "_Cpf");
+                    table.ForeignKey(
+                        name: "FK_clienteVeiculo_veiculo_Veiculo_Placa",
+                        column: x => x.Veiculo_Placa,
+                        principalTable: "veiculo",
+                        principalColumn: "_Placa");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ClienteVeiculo1",
                 columns: table => new
                 {
                     Clientes_Cpf = table.Column<string>(type: "TEXT", nullable: false),
@@ -91,15 +114,15 @@ namespace Estacionamento.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ClienteVeiculo", x => new { x.Clientes_Cpf, x.Veiculos_Placa });
+                    table.PrimaryKey("PK_ClienteVeiculo1", x => new { x.Clientes_Cpf, x.Veiculos_Placa });
                     table.ForeignKey(
-                        name: "FK_ClienteVeiculo_cliente_Clientes_Cpf",
+                        name: "FK_ClienteVeiculo1_cliente_Clientes_Cpf",
                         column: x => x.Clientes_Cpf,
                         principalTable: "cliente",
                         principalColumn: "_Cpf",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ClienteVeiculo_veiculo_Veiculos_Placa",
+                        name: "FK_ClienteVeiculo1_veiculo_Veiculos_Placa",
                         column: x => x.Veiculos_Placa,
                         principalTable: "veiculo",
                         principalColumn: "_Placa",
@@ -184,8 +207,8 @@ namespace Estacionamento.Migrations
                     _tipoServico = table.Column<string>(type: "TEXT", nullable: true),
                     _valorServico = table.Column<double>(type: "REAL", nullable: true),
                     Ticket_codTicket = table.Column<int>(type: "INTEGER", nullable: true),
-                    Veiculo_Placa = table.Column<string>(type: "TEXT", nullable: true),
-                    NotaFiscal_NumeroNota = table.Column<string>(type: "TEXT", nullable: true)
+                    NotaFiscal_NumeroNota = table.Column<string>(type: "TEXT", nullable: true),
+                    Veiculo_Placa = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -208,8 +231,18 @@ namespace Estacionamento.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClienteVeiculo_Veiculos_Placa",
-                table: "ClienteVeiculo",
+                name: "IX_clienteVeiculo_Cliente_Cpf",
+                table: "clienteVeiculo",
+                column: "Cliente_Cpf");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_clienteVeiculo_Veiculo_Placa",
+                table: "clienteVeiculo",
+                column: "Veiculo_Placa");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClienteVeiculo1_Veiculos_Placa",
+                table: "ClienteVeiculo1",
                 column: "Veiculos_Placa");
 
             migrationBuilder.CreateIndex(
@@ -294,7 +327,10 @@ namespace Estacionamento.Migrations
                 table: "notafiscal");
 
             migrationBuilder.DropTable(
-                name: "ClienteVeiculo");
+                name: "clienteVeiculo");
+
+            migrationBuilder.DropTable(
+                name: "ClienteVeiculo1");
 
             migrationBuilder.DropTable(
                 name: "cliente");

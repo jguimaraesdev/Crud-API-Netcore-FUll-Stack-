@@ -29,6 +29,7 @@ export class MarcasComponent implements OnInit {
   }
   enviarFormulario(): void {
     const marca: Marca = this.formulario.value;
+    console.log(marca);
     const observer: Observer<Marca> = {
       next(_result): void {
         alert('Marca salva com sucesso.');

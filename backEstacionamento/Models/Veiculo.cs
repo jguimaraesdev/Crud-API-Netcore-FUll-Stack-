@@ -7,7 +7,6 @@ public class Veiculo
     [Key]
 
     public string? _Placa {get; set;}
-    public string? _Descricao {get; set;}
     public String? _Cor { get; set; }
     public int? _idModelo {get; set;}
     //-------------------------------------------------------------------------

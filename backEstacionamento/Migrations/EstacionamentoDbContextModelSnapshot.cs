@@ -37,6 +37,29 @@ namespace Estacionamento.Migrations
                     b.Property<string>("Clientes_Cpf")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Cliente_Cpf")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Veiculo_Placa")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Veiculos_Placa")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Clientes_Cpf");
+
+                    b.HasIndex("Cliente_Cpf");
+
+                    b.HasIndex("Veiculo_Placa");
+
+                    b.ToTable("clienteVeiculo");
+                });
+
+            modelBuilder.Entity("ClienteVeiculo1", b =>
+                {
+                    b.Property<string>("Clientes_Cpf")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Veiculos_Placa")
                         .HasColumnType("TEXT");
 
@@ -44,7 +67,7 @@ namespace Estacionamento.Migrations
 
                     b.HasIndex("Veiculos_Placa");
 
-                    b.ToTable("ClienteVeiculo");
+                    b.ToTable("ClienteVeiculo1");
                 });
 
             modelBuilder.Entity("Marca", b =>
@@ -225,9 +248,6 @@ namespace Estacionamento.Migrations
                     b.Property<string>("_Cor")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("_Descricao")
-                        .HasColumnType("TEXT");
-
                     b.Property<int?>("_idModelo")
                         .HasColumnType("INTEGER");
 
@@ -239,6 +259,21 @@ namespace Estacionamento.Migrations
                 });
 
             modelBuilder.Entity("ClienteVeiculo", b =>
+                {
+                    b.HasOne("Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("Cliente_Cpf");
+
+                    b.HasOne("Veiculo", "Veiculo")
+                        .WithMany()
+                        .HasForeignKey("Veiculo_Placa");
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Veiculo");
+                });
+
+            modelBuilder.Entity("ClienteVeiculo1", b =>
                 {
                     b.HasOne("Cliente", null)
                         .WithMany()
@@ -296,13 +331,11 @@ namespace Estacionamento.Migrations
                         .WithMany("Servicos")
                         .HasForeignKey("Ticket_codTicket");
 
-                    b.HasOne("Veiculo", "Veiculo")
+                    b.HasOne("Veiculo", null)
                         .WithMany("Servicos")
                         .HasForeignKey("Veiculo_Placa");
 
                     b.Navigation("Ticket");
-
-                    b.Navigation("Veiculo");
                 });
 
             modelBuilder.Entity("Ticket", b =>

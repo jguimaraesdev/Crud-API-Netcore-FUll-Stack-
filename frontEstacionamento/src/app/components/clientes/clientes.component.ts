@@ -23,8 +23,11 @@ export class ClientesComponent implements OnInit {
       _Email: new FormControl(null)
     })
   }
+
+  
   enviarFormulario(): void {
     const cliente: Cliente = this.formulario.value;
+    console.log(cliente);
     const observer: Observer<Cliente> = {
       next(_result): void {
         alert('Cliente salvo com sucesso.');
@@ -35,10 +38,11 @@ export class ClientesComponent implements OnInit {
       complete(): void {
       },
     };
+    /*
     if (cliente._Cpf && !isNaN(Number(cliente._Cpf))) {
       this.clientesService.alterar(cliente).subscribe(observer);
-    } else {
+    } else {*/
       this.clientesService.cadastrar(cliente).subscribe(observer);
-    }
+    
   }
 }
