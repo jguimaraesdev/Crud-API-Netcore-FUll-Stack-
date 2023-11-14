@@ -25,6 +25,7 @@ import { ServicosService } from './servicos.service';
 import { ServicosComponent } from './components/servicos/servicos.component';
 import { NotaFiscalService } from './notas-fiscais.service';
 import { NotasFiscaisComponent } from './components/notas-fiscais/notas-fiscais.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { NotasFiscaisComponent } from './components/notas-fiscais/notas-fiscais.
     PeriodosComponent,
     TicketsComponent,
     ServicosComponent,
-    NotasFiscaisComponent
+    NotasFiscaisComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

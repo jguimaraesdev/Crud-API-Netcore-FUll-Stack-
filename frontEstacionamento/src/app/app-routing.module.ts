@@ -8,6 +8,7 @@ import { PeriodosComponent } from './components/periodos/periodos.component';
 import { TicketsComponent } from './components/tickets/tickets.component';
 import { ServicosComponent } from './components/servicos/servicos.component';
 import { NotasFiscaisComponent } from './components/notas-fiscais/notas-fiscais.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'periodo', component: PeriodosComponent},
   {path: 'ticket', component: TicketsComponent},
   {path: 'servico', component: ServicosComponent},
-  {path: 'notafiscal', component: NotasFiscaisComponent}
+  {path: 'notafiscal', component: NotasFiscaisComponent},
+  {path: 'home', component: HomeComponent}
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
