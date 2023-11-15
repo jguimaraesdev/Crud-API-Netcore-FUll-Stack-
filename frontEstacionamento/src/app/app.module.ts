@@ -40,6 +40,7 @@ import { HomeComponent } from './components/home/home.component';
     ServicosComponent,
     NotasFiscaisComponent,
     HomeComponent
+
   ],
   imports: [
     BrowserModule,
@@ -48,7 +49,8 @@ import { HomeComponent } from './components/home/home.component';
     HttpClientModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    
   ],
   providers: [
     HttpClientModule, 

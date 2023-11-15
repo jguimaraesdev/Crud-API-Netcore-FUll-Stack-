@@ -27,7 +27,7 @@ export class NotasFiscaisComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.tituloFormulario = 'Novo Ticket';
+    this.tituloFormulario = 'Nota Fiscal';
 
     this.clientesService.listar().subscribe(cliente => {
       this.clientes = cliente;
