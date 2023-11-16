@@ -31,7 +31,7 @@ export class VeiculosComponent implements OnInit {
       console.log(modelos);
       this.listamodelos = modelos;
       if (this.listamodelos && this.listamodelos.length > 0) {
-        this.formulario.get('_idModelo')?.setValue(this.listamodelos[0].idModelo);
+        this.formulario.get('_idModelo')?.setValue(this.listamodelos[0]._idModelo);
       }
     });
     

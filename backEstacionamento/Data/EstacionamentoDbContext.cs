@@ -10,7 +10,6 @@ public class EstacionamentoDbContext : DbContext
     public DbSet<Periodo>? periodo {get; set;}
     public DbSet<Ticket>? ticket {get; set;}
     public DbSet<Modelo>? modelo {get; set;}
-    public DbSet<ClienteVeiculo> clienteVeiculo{get;set;}
 
     //----------------------------------------------------------------------------------
     //configuração de conexão com o banco

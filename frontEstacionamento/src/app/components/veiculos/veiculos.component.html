@@ -21,7 +21,7 @@
         <div class="form-group">
           <label>Modelo</label>
           <select class="form-control form-control-sm" formControlName= "_idModelo">
-            <option *ngFor="let modelo of listamodelos" [value]= "modelo.idModelo">
+            <option *ngFor="let modelo of listamodelos" [value]= "modelo._idModelo">
               {{ modelo._nomeModelo }} 
               {{ modelo._TipoModelo }}
               {{ modelo._motor }}

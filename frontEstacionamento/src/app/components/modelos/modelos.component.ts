@@ -31,7 +31,7 @@ export class ModelosComponent implements OnInit {
     });
     
     this.formulario = new FormGroup({
-       idModelo: new FormControl(null),
+      _idModelo: new FormControl(null),
       _nomeModelo: new FormControl(null),
       _motor: new FormControl(null),
       _qtdPortas: new FormControl(null),
@@ -54,7 +54,7 @@ export class ModelosComponent implements OnInit {
       complete(): void {
       },
     };
-    if (modelo.idModelo && !isNaN(Number(modelo.idModelo))) {
+    if (modelo._idModelo && !isNaN(Number(modelo._idModelo))) {
       this.modelosService.alterar(modelo).subscribe(observer);
     } else {
       this.modelosService.cadastrar(modelo).subscribe(observer);
