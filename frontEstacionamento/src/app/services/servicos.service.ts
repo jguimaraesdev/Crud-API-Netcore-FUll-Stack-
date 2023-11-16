@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Servico } from './Servico';
+import { Servico } from '../models/Servico';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,7 +14,7 @@ const httpOptions = {
 })
 
 export class ServicosService {
-  apiUrl = 'http://localhost:5000/Modelo';
+  private apiUrl = 'http://localhost:5000/Servico';
   constructor(private http: HttpClient) { }
 
   listar(): Observable<Servico[]> {

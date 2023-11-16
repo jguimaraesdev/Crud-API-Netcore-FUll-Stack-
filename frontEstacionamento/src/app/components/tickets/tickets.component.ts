@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observer } from 'rxjs';
-import { Periodo } from 'src/app/Periodo';
-import { PeriodosService } from 'src/app/periodos.service';
-import { Ticket } from 'src/app/Ticket';
-import { Veiculo } from 'src/app/Veiculo';
-import { TicketsService } from 'src/app/tickets.service';
-import { VeiculosService } from 'src/app/veiculos.service';
+import { Periodo } from 'src/app/models/Periodo';
+import { PeriodosService } from 'src/app/services/periodos.service';
+import { Ticket } from 'src/app/models/Ticket';
+import { Veiculo } from 'src/app/models/Veiculo';
+import { TicketsService } from 'src/app/services/tickets.service';
+import { VeiculosService } from 'src/app/services/veiculos.service';
 
 @Component({
   selector: 'app-modelos',
@@ -53,6 +53,7 @@ export class TicketsComponent implements OnInit {
   }
   enviarFormulario(): void {
     const ticket: Ticket = this.formulario.value;
+    console.log(ticket);
     const observer: Observer<Ticket> = {
       next(_result): void {
         alert('Ticket salvo com sucesso.');
@@ -63,10 +64,10 @@ export class TicketsComponent implements OnInit {
       complete(): void {
       },
     };
-    if (ticket._codTicket && !isNaN(Number(ticket._codTicket))) {
+    /*if (ticket._codTicket && !isNaN(Number(ticket._codTicket))) {
       this.ticketsService.alterar(ticket).subscribe(observer);
-    } else {
+    } else {*/
       this.ticketsService.cadastrar(ticket).subscribe(observer);
     }
-  }
+  
 }

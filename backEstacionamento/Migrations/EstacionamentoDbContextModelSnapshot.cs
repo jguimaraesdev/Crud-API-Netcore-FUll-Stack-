@@ -19,13 +19,13 @@ namespace Estacionamento.Migrations
             modelBuilder.Entity("Cliente", b =>
                 {
                     b.Property<string>("_Cpf")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT").HasMaxLength(11);
 
                     b.Property<string>("_Email")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT").HasMaxLength(35);
 
                     b.Property<string>("_Nome")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT").HasMaxLength(40);
 
                     b.HasKey("_Cpf");
 

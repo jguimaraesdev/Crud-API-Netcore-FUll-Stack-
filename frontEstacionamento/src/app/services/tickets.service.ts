@@ -1,7 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Modelo } from './Modelo';
+import { Ticket } from '../models/Ticket';
+
+
+
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type' : 'application/json'
@@ -12,28 +15,28 @@ const httpOptions = {
   providedIn: 'root'
 })
 
-export class ModelosService {
-  apiUrl = 'http://localhost:5000/Modelo';
+export class TicketsService {
+  private apiUrl = 'http://localhost:5000/Ticket';
   constructor(private http: HttpClient) { }
 
-  listar(): Observable<Modelo[]> {
+  listar(): Observable<Ticket[]> {
     const url = `${this.apiUrl}/listar`;
-    return this.http.get<Modelo[]>(url);
+    return this.http.get<Ticket[]>(url);
   }
 
-  buscar(id : number): Observable<Modelo> {
+  buscar(id : number): Observable<Ticket> {
     const url = `${this.apiUrl}/buscar/${id}`;
-    return this.http.get<Modelo>(url);
+    return this.http.get<Ticket>(url);
   }
 
-  cadastrar(modelo: Modelo): Observable<any> {
+  cadastrar(ticket: Ticket): Observable<any> {
     const url = `${this.apiUrl}/cadastrar`;
-    return this.http.post<any>(url, modelo, httpOptions);
+    return this.http.post<any>(url, ticket, httpOptions);
   }
 
-  alterar(modelo: Modelo): Observable<any> {
+  alterar(ticket: Ticket): Observable<any> {
     const url = `${this.apiUrl}/alterar`;
-    return this.http.put<any>(url, modelo, httpOptions);
+    return this.http.put<any>(url, ticket, httpOptions);
   }
 
   excluir(id: number): Observable<any> {

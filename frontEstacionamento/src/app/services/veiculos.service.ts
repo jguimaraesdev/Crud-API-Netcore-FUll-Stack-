@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Veiculo } from './Veiculo';
+import { Veiculo } from '../models/Veiculo';
+
+
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type' : 'application/json'
@@ -12,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class VeiculosService {
-  apiUrl = 'http://localhost:5000/Carro';
+  apiUrl = 'http://localhost:5000/Veiculo';
   constructor(private http: HttpClient) { }
 
   listar(): Observable<Veiculo[]> {
@@ -27,12 +29,12 @@ export class VeiculosService {
 
   cadastrar(veiculo: Veiculo): Observable<any> {
     const url = `${this.apiUrl}/cadastrar`;
-    return this.http.post<Veiculo>(url, Veiculo, httpOptions);
+    return this.http.post<Veiculo>(url, veiculo, httpOptions);
   }
 
   alterar(veiculo: Veiculo): Observable<any> {
     const url = `${this.apiUrl}/alterar`;
-    return this.http.put<Veiculo>(url, Veiculo, httpOptions);
+    return this.http.put<Veiculo>(url, veiculo, httpOptions);
   }
 
   excluir(placa: string): Observable<any> {

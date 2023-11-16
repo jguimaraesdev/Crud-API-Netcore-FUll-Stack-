@@ -1,7 +1,8 @@
 import { Ticket } from "./Ticket";
+
 export class Servico
 {
-    _idServico: number =0;
+    _idServico?: number;
     _codTicket: Ticket | undefined;
-    _valorServico: number =0;
+    _valorServico: number = 0;
 }

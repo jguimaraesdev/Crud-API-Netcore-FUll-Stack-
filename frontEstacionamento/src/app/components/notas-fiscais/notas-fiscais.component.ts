@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observer } from 'rxjs';
-import { Cliente } from 'src/app/Cliente';
-import { ClientesService } from 'src/app/clientes.service';
-import { Servico } from 'src/app/Servico';
-import { ServicosService } from 'src/app/servicos.service';
-import { NotaFiscalService } from 'src/app/notas-fiscais.service';
-import { NotaFiscal } from 'src/app/NotaFiscal';
+import { Cliente } from 'src/app/models/Cliente';
+import { ClientesService } from 'src/app/services/clientes.service';
+import { Servico } from 'src/app/models/Servico';
+import { ServicosService } from 'src/app/services/servicos.service';
+import { NotaFiscalService } from 'src/app/services/notas-fiscais.service';
+import { NotaFiscal } from 'src/app/models/NotaFiscal';
 
 @Component({
   selector: 'app-modelos',

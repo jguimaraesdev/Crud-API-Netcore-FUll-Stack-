@@ -42,6 +42,7 @@ public class VeiculoController : ControllerBase
     [Route("cadastrar")]
     public async Task<IActionResult> Cadastrar(Veiculo veiculo)
     {
+        if(_context is null) return BadRequest();
         await _context.AddAsync(veiculo);
         await _context.SaveChangesAsync();
         return Created("", veiculo);
@@ -66,7 +67,7 @@ public class VeiculoController : ControllerBase
     //--------------------------------------------------------------------//
 
     [HttpDelete]
-    [Route("excluirveiculo/{placa}")]
+    [Route("excluir/{placa}")]
     public async Task<IActionResult> excluir(string placa)
     {
         if(_context is null) return BadRequest();

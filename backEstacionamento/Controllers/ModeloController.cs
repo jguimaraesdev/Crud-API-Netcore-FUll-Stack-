@@ -48,6 +48,7 @@ public class ModeloController : ControllerBase
     {
         if(_dbContext is null) return BadRequest();
         await _dbContext.AddAsync(modelo);
+        if(_dbContext.modelo is null) return BadRequest();
         await _dbContext.SaveChangesAsync();
         return Created("", modelo);
     }
@@ -82,4 +83,18 @@ public class ModeloController : ControllerBase
         return Ok();
     }
 
+    //--------------------------------------------------------------------//
+
+    [HttpPut()]
+    [Route("update/id")]
+    private async Task<ActionResult> updateid(Modelo modelo)
+    {
+        if(_dbContext is null) return BadRequest();
+        if(_dbContext.modelo is null) return BadRequest();
+        var modeloTemp = await _dbContext.modelo.FindAsync(modelo);
+        if(modeloTemp is null) return BadRequest();
+        modeloTemp.Marca = modelo.Marca;
+        await _dbContext.SaveChangesAsync();
+        return Ok();
+    }
 }

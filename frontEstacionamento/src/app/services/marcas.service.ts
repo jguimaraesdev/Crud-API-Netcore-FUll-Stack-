@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Ticket } from './Ticket';
+import { Marca } from '../models/Marca';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,28 +13,29 @@ const httpOptions = {
   providedIn: 'root'
 })
 
-export class TicketsService {
-  apiUrl = 'http://localhost:5000/Modelo';
+export class MarcasService {
+  private apiUrl = 'http://localhost:5000/Marca';
   constructor(private http: HttpClient) { }
 
-  listar(): Observable<Ticket[]> {
+
+  listar(): Observable<Array<Marca>> {
     const url = `${this.apiUrl}/listar`;
-    return this.http.get<Ticket[]>(url);
+    return this.http.get<Array<Marca>>(url);
   }
 
-  buscar(id : number): Observable<Ticket> {
+  buscar(id: number): Observable<Marca> {
     const url = `${this.apiUrl}/buscar/${id}`;
-    return this.http.get<Ticket>(url);
+    return this.http.get<Marca>(url);
   }
 
-  cadastrar(ticket: Ticket): Observable<any> {
+  cadastrar(marca: Marca): Observable<any> {
     const url = `${this.apiUrl}/cadastrar`;
-    return this.http.post<any>(url, ticket, httpOptions);
+    return this.http.post<any>(url, marca, httpOptions);
   }
 
-  alterar(ticket: Ticket): Observable<any> {
+  alterar(marca: Marca): Observable<any> {
     const url = `${this.apiUrl}/alterar`;
-    return this.http.put<any>(url, ticket, httpOptions);
+    return this.http.put<any>(url, marca, httpOptions);
   }
 
   excluir(id: number): Observable<any> {

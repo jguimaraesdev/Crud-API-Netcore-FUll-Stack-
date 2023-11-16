@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observer } from 'rxjs';
-import { Servico } from 'src/app/Servico';
-import { Ticket } from 'src/app/Ticket';
-import { ServicosService } from 'src/app/servicos.service';
-import { TicketsService } from 'src/app/tickets.service';
+import { Servico } from 'src/app/models/Servico';
+import { Ticket } from 'src/app/models/Ticket';
+import { ServicosService } from 'src/app/services/servicos.service';
+import { TicketsService } from 'src/app/services/tickets.service';
 
 
 @Component({

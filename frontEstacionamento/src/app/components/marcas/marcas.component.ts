@@ -1,8 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MarcasService } from 'src/app/marcas.service';
-import { Marca } from 'src/app/Marca';
+import { MarcasService } from 'src/app/services/marcas.service';
+import { Marca } from 'src/app/models/Marca';
 import { Observer } from 'rxjs';
 
 @Component({

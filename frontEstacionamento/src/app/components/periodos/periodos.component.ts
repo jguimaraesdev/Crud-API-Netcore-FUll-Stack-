@@ -2,10 +2,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observer } from 'rxjs';
-import { Veiculo } from 'src/app/Veiculo';
-import { VeiculosService } from 'src/app/veiculos.service';
-import { Periodo } from 'src/app/Periodo';
-import { PeriodosService } from 'src/app/periodos.service';
+import { Veiculo } from 'src/app/models/Veiculo';
+import { VeiculosService } from 'src/app/services/veiculos.service';
+import { Periodo } from 'src/app/models/Periodo';
+import { PeriodosService } from 'src/app/services/periodos.service';
 
 @Component({
   selector: 'app-modelos',
@@ -21,7 +21,7 @@ export class PeriodosComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.tituloFormulario = 'Novo Modelo';
+    this.tituloFormulario = 'Registro Periodo';
 
     this.veiculosService.listar().subscribe(veiculos => {
       this.veiculos = veiculos;

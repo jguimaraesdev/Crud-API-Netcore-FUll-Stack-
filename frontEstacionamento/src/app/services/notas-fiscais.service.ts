@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Marca } from './Marca';
+import { NotaFiscal } from '../models/NotaFiscal';
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,29 +14,29 @@ const httpOptions = {
   providedIn: 'root'
 })
 
-export class MarcasService {
-  apiUrl = 'http://localhost:5000/Marca';
+export class NotaFiscalService {
+  private apiUrl = 'http://localhost:5000/Nota';
+  
   constructor(private http: HttpClient) { }
 
-
-  listar(): Observable<Array<Marca>> {
+  listar(): Observable<NotaFiscal[]> {
     const url = `${this.apiUrl}/listar`;
-    return this.http.get<Array<Marca>>(url);
+    return this.http.get<NotaFiscal[]>(url);
   }
 
-  buscar(id: number): Observable<Marca> {
-    const url = `${this.apiUrl}/buscar/${id}`;
-    return this.http.get<Marca>(url);
+  buscar(numeroNota : string): Observable<NotaFiscal> {
+    const url = `${this.apiUrl}/buscar/${numeroNota}`;
+    return this.http.get<NotaFiscal>(url);
   }
 
-  cadastrar(marca: Marca): Observable<any> {
+  cadastrar(notaFiscal: NotaFiscal): Observable<any> {
     const url = `${this.apiUrl}/cadastrar`;
-    return this.http.post<any>(url, marca, httpOptions);
+    return this.http.post<any>(url, notaFiscal, httpOptions);
   }
 
-  alterar(marca: Marca): Observable<any> {
+  alterar(notaFiscal: NotaFiscal): Observable<any> {
     const url = `${this.apiUrl}/alterar`;
-    return this.http.put<any>(url, marca, httpOptions);
+    return this.http.put<any>(url, notaFiscal, httpOptions);
   }
 
   excluir(id: number): Observable<any> {

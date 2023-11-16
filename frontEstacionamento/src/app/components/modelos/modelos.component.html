@@ -26,8 +26,8 @@
           <div class="form-group">
             <label>Nome Marca</label>
             <select class="form-control form-control-sm" formControlName="_idMarca">
-              <option *ngFor="let marca of marcas" [value]="marca._idMarca">
-                {{ marca._nomeMarca }}
+              <option *ngFor="let marca of marcas" [value]= "marca._idMarca">
+                {{ marca._nomeMarca }} 
               </option>
             </select>
           </div>

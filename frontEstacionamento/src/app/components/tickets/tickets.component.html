@@ -11,7 +11,7 @@
           <div class="form-group">
             <label>Placa</label>
             <select class="form-control form-control-sm" formControlName="_Placa">
-              <option *ngFor="let veiculo of veiculos" [value]="veiculo._Placa">
+              <option *ngFor="let veiculo of veiculos" [value]= "veiculo._Placa">
                 {{ veiculo._Placa }}
               </option>
             </select>
@@ -19,8 +19,8 @@
         <div class="form-group">
             <label>Periodo</label>
             <select class="form-control form-control-sm" formControlName="_idPeriodo">
-              <option *ngFor="let periodo of periodos" [value]="periodo._idPeriodo">
-                {{ periodo._idPeriodo }}
+              <option *ngFor="let periodo of periodos" [value]= "periodo._idPeriodo">
+                {{ periodo._HoraEntrada}}
               </option>
             </select>
         </div>

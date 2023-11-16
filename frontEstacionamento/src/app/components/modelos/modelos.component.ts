@@ -2,10 +2,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observer } from 'rxjs';
-import { ModelosService } from 'src/app/modelos.service';
-import { Modelo } from 'src/app/Modelo';
-import { Marca } from 'src/app/Marca';
-import { MarcasService } from 'src/app/marcas.service';
+import { ModelosService } from 'src/app/services/modelos.service';
+import { Modelo } from 'src/app/models/Modelo';
+import { Marca } from 'src/app/models/Marca';
+import { MarcasService } from 'src/app/services/marcas.service';
 
 @Component({
   selector: 'app-modelos',
@@ -21,7 +21,7 @@ export class ModelosComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.tituloFormulario = 'Novo Modelo';
+    this.tituloFormulario = 'Cadastro Modelo';
 
     this.marcasService.listar().subscribe(marcas => {
       this.marcas = marcas;
@@ -31,7 +31,7 @@ export class ModelosComponent implements OnInit {
     });
     
     this.formulario = new FormGroup({
-      _idModelo: new FormControl(null),
+       idModelo: new FormControl(null),
       _nomeModelo: new FormControl(null),
       _motor: new FormControl(null),
       _qtdPortas: new FormControl(null),
@@ -43,6 +43,7 @@ export class ModelosComponent implements OnInit {
   }
   enviarFormulario(): void {
     const modelo: Modelo = this.formulario.value;
+    console.log(modelo);
     const observer: Observer<Modelo> = {
       next(_result): void {
         alert('Modelo salvo com sucesso.');
@@ -53,7 +54,7 @@ export class ModelosComponent implements OnInit {
       complete(): void {
       },
     };
-    if (modelo._idModelo && !isNaN(Number(modelo._idModelo))) {
+    if (modelo.idModelo && !isNaN(Number(modelo.idModelo))) {
       this.modelosService.alterar(modelo).subscribe(observer);
     } else {
       this.modelosService.cadastrar(modelo).subscribe(observer);

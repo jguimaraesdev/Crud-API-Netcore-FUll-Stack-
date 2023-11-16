@@ -74,6 +74,9 @@ using Microsoft.EntityFrameworkCore;
                 var tickettemp = await _context.ticket.FindAsync(inputTicket._codTicket);
                 if (tickettemp is null) return BadRequest();
                 tickettemp._codTicket = inputTicket._codTicket;
+                tickettemp._idPeriodo = inputTicket._idPeriodo;
+                tickettemp._Placa = inputTicket._Placa;
+            
                 await _context.SaveChangesAsync();
                 return Ok();
             }
