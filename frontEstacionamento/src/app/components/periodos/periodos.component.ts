@@ -8,7 +8,7 @@ import { Periodo } from 'src/app/models/Periodo';
 import { PeriodosService } from 'src/app/services/periodos.service';
 
 @Component({
-  selector: 'app-modelos',
+  selector: 'app-periodo',
   templateUrl: './periodos.component.html',
   styleUrls: ['./periodos.component.css']
 })

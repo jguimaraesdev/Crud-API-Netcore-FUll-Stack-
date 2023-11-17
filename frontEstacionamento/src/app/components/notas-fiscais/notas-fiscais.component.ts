@@ -9,7 +9,7 @@ import { NotaFiscalService } from 'src/app/services/notas-fiscais.service';
 import { NotaFiscal } from 'src/app/models/NotaFiscal';
 
 @Component({
-  selector: 'app-modelos',
+  selector: 'app-notafiscal',
   templateUrl: './notas-fiscais.component.html',
   styleUrls: ['./notas-fiscais.component.css']
 })

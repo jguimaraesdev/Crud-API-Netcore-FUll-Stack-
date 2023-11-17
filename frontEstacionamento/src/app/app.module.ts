@@ -27,6 +27,9 @@ import { ServicosComponent } from './components/servicos/servicos.component';
 import { NotaFiscalService } from './services/notas-fiscais.service';
 import { NotasFiscaisComponent } from './components/notas-fiscais/notas-fiscais.component';
 import { HomeComponent } from './components/home/home.component';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+
 
 
 @NgModule({
@@ -40,7 +43,7 @@ import { HomeComponent } from './components/home/home.component';
     TicketsComponent,
     ServicosComponent,
     NotasFiscaisComponent,
-    HomeComponent
+    HomeComponent,
 
   ],
   imports: [
@@ -50,8 +53,8 @@ import { HomeComponent } from './components/home/home.component';
     HttpClientModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
-    BrowserAnimationsModule
-    
+    BrowserAnimationsModule,
+  
   ],
   providers: [
     
@@ -63,8 +66,10 @@ import { HomeComponent } from './components/home/home.component';
     PeriodosService,
     TicketsService,
     ServicosService,
-    NotaFiscalService
+    NotaFiscalService,
   ],
   bootstrap: [AppComponent]
+  
 })
 export class AppModule { }
+platformBrowserDynamic().bootstrapModule(AppModule);

@@ -8,7 +8,7 @@ import { TicketsService } from 'src/app/services/tickets.service';
 
 
 @Component({
-  selector: 'app-modelos',
+  selector: 'app-servico',
   templateUrl: './servicos.component.html',
   styleUrls: ['./servicos.component.css']
 })

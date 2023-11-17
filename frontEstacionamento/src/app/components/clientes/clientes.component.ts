@@ -5,7 +5,7 @@ import { Cliente } from 'src/app/models/Cliente';
 import { Observer } from 'rxjs';
 
 @Component({
-  selector: 'app-clientes',
+  selector: 'app-cliente',
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.css']
 })

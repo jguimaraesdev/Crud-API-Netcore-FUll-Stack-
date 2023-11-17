@@ -9,7 +9,7 @@ import { TicketsService } from 'src/app/services/tickets.service';
 import { VeiculosService } from 'src/app/services/veiculos.service';
 
 @Component({
-  selector: 'app-modelos',
+  selector: 'app-ticket',
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.css']
 })

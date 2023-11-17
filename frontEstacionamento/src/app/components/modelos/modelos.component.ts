@@ -8,7 +8,7 @@ import { Marca } from 'src/app/models/Marca';
 import { MarcasService } from 'src/app/services/marcas.service';
 
 @Component({
-  selector: 'app-modelos',
+  selector: 'app-modelo',
   templateUrl: './modelos.component.html',
   styleUrls: ['./modelos.component.css']
 })

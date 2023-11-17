@@ -6,7 +6,7 @@ import { Marca } from 'src/app/models/Marca';
 import { Observer } from 'rxjs';
 
 @Component({
-  selector: 'app-marcas',
+  selector: 'app-marca',
   templateUrl: './marcas.component.html',
   styleUrls: ['./marcas.component.css'],
 })

@@ -12,10 +12,10 @@ import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   
-  {path: 'veiculos', component: VeiculosComponent},
-  {path: 'clientes', component: ClientesComponent},
+  {path: 'veiculo', component: VeiculosComponent},
+  {path: 'cliente', component: ClientesComponent},
   {path: 'marcas', component: MarcasComponent},
-  {path: 'modelos', component: ModelosComponent},
+  {path: 'modelo', component: ModelosComponent},
   {path: 'periodo', component: PeriodosComponent},
   {path: 'ticket', component: TicketsComponent},
   {path: 'servico', component: ServicosComponent},

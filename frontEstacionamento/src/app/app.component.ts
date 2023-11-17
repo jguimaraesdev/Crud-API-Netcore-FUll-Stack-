@@ -1,25 +1,33 @@
 
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  
   
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'frontEstacionamento';
 
-  empresaForm = this.fb.group({
-    controlEmpresa: ['']
+  Form = this.fb.group({
+    control: ['']
   });
 
   constructor(public fb: FormBuilder) { }
 
-  onSubmit() {
-    alert(JSON.stringify(this.empresaForm.value))
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
+
+  onSubmit() {
+    alert(JSON.stringify(this.Form.value))
+  }
+ 
 }
