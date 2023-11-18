@@ -21,7 +21,7 @@ export class PeriodosComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.tituloFormulario = 'Registro Periodo';
+    this.tituloFormulario = 'Registrar';
 
     this.veiculosService.listar().subscribe(veiculos => {
       this.veiculos = veiculos;

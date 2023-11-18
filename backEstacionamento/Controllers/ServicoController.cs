@@ -71,7 +71,7 @@ using Microsoft.EntityFrameworkCore;
             if (_context.servico is null) return BadRequest();
             var servicotemp = await _context.servico.FindAsync(servico._idServico);
             if (servicotemp is null) return BadRequest();
-            servicotemp = servico;
+            servicotemp._idServico = servico._idServico;
             await _context.SaveChangesAsync();
             
             return Ok();

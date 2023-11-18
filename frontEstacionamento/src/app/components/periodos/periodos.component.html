@@ -5,11 +5,9 @@
         <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
           <div class="form-group">
             <label>Placa</label>
-            <select class="form-control form-control-sm" formControlName="_Placa">
-              <option *ngFor="let veiculo of veiculos" [value]="veiculo._Placa">
-                {{ veiculo._Placa }}
-              </option>
-            </select>
+            <div class="form-group">
+              <input type="text" class="form-control form-control-sm"  formControlName="_Placa" oninput="this.value = this.value.toUpperCase()"/>
+            </div>
           </div>
           <div class="container">
             <div class="row">
@@ -19,7 +17,7 @@
                 </button>
               </div>
               <div class="pl-1">
-                <button type="button" class="btn btn-sm btn-light">Voltar</button>
+                <button type="button" class="btn btn-sm btn-light" routerLink="/home">Voltar</button><router-outlet></router-outlet>
               </div>
             </div>
           </div>

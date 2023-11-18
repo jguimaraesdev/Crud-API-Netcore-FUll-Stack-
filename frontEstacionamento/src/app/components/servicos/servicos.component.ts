@@ -37,13 +37,13 @@ export class ServicosComponent implements OnInit {
     this.formulario = new FormGroup({
       _idServico: new FormControl(null),
       _codTicket: new FormControl(null),
-      _tipoServico: new FormControl(null),
       _valorServico: new FormControl(null)
 
     })
   }
   enviarFormulario(): void {
     const servico: Servico = this.formulario.value;
+    console.log(servico);
     const observer: Observer<Servico> = {
       next(_result): void {
         alert('Servico salvo com sucesso.');
@@ -54,10 +54,9 @@ export class ServicosComponent implements OnInit {
       complete(): void {
       },
     };
-    if (servico._idServico && !isNaN(Number(servico._idServico))) {
-      this.servicoService.alterar(servico).subscribe(observer);
-    } else {
+    //*if (servico._idServico && !isNaN(Number(servico._idServico))) {
+      //this.servicoService.alterar(servico).subscribe(observer);
+    //} else /*
       this.servicoService.cadastrar(servico).subscribe(observer);;
     }
   }
-}

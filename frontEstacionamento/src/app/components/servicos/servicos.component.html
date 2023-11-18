@@ -1,36 +1,44 @@
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-  <h1 class="display-4">Serviços</h1>
-  <p class="lead">Aqui estão um de nossos serviços para veiculo dentro do estacionamento, aproveite..!</p>
-</div>
-<div class="container">
-  <div class="card-deck mb-3 text-center">
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Estética</h4>
-      </div>
-      <div class="card-body">
-        <h1 class="card-title pricing-card-title">R$250<small class="text-muted">,00</small></h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>Polimento</li>
-          <li>Vitrificação</li>
-          <li>Polimento Faróis</li>
-        </ul>
-        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Aproveitar</button>
-      </div>
-    </div>
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Higienização</h4>
-      </div>
-      <div class="card-body">
-        <h1 class="card-title pricing-card-title">R$150<small class="text-muted">,00</small></h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>Lavagem externa</li>
-          <li>Limpeza interna</li>
-          <li>Revitalização de Acessórios</li>
-        </ul>
-        <button type="button" class="btn btn-lg btn-block btn-primary">Aproveitar</button>
-      </div>
-    </div>
+<div class="container p-5">
+  <div class="row">
+    <div class="col-6 border border-light rounded p-5 shadow" *ngIf="formulario">
+      <h6>{{ tituloFormulario }}</h6>
+      <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
+        <div class="form-group">
+          <label>Código Servico</label>
+          <input type="text" class="form-control form-control-sm" 
+          formControlName="_idServico"/>
+        </div>
+        <div class="form-group">
+          <label>Código Ticket</label>
+          <select class="form-control form-control-sm" formControlName="_idMarca">
+            <option *ngFor="let ticket of tickets" [value]= "ticket._codTicket">
+              {{ ticket._codTicket}} 
+            </option>
+          </select>
+        </div>
+        <div class="form-action">
+          <label>Selecione o Servico:</label>
+          <select class="form-control" formControlName="_valorServico">
+            <option value= 250.00>Estética</option>
+            <option value= 150.00>Higienização</option>
+          </select>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div>
+              <div>
+              <button type="submit" class="btn btn-sm btn-outline-secondary">
+                Salvar
+              </button>
+            </div>
+            </div>
+            <div class="pl-1">
+              <button type="button" class="btn btn-sm btn-light" routerLink="/veiculo">Voltar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      veja os valores <a routerLink="/servicoextras">Clicando aqui</a><router-outlet></router-outlet>
     </div>
   </div>
+</div>

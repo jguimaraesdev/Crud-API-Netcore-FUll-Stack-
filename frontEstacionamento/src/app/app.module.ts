@@ -28,6 +28,8 @@ import { NotaFiscalService } from './services/notas-fiscais.service';
 import { NotasFiscaisComponent } from './components/notas-fiscais/notas-fiscais.component';
 import { HomeComponent } from './components/home/home.component';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { ServicoextrasComponent } from './components/servicoextras/servicoextras.component';
+import { PagarComponent } from './components/pagar/pagar.component';
 
 
 
@@ -44,6 +46,8 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
     ServicosComponent,
     NotasFiscaisComponent,
     HomeComponent,
+    ServicoextrasComponent,
+    PagarComponent,
 
   ],
   imports: [
@@ -67,6 +71,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
     TicketsService,
     ServicosService,
     NotaFiscalService,
+    
   ],
   bootstrap: [AppComponent]
   

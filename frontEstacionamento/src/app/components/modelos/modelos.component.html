@@ -5,8 +5,7 @@
         <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
           <div class="form-group">
             <label>Nome Modelo</label>
-            <input type="text" class="form-control form-control-sm" 
-            formControlName="_nomeModelo"/>
+            <input type="text" class="form-control form-control-sm" oninput="this.value = this.value.toUpperCase()"/>
           </div>
           <div class="form-group">
             <label>Motor</label>
@@ -52,11 +51,12 @@
                 </button>
               </div>
               <div class="pl-1">
-                <button type="button" class="btn btn-sm btn-light">Voltar</button>
+                <button type="button" class="btn btn-sm btn-light" routerLink="/veiculo">Voltar</button>
               </div>
             </div>
           </div>
         </form>
+        não encontrou sua marca? <a routerLink="/marcas">Clique aqui</a>
       </div>
     </div>
 </div>

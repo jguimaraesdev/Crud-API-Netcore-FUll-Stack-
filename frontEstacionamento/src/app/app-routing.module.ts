@@ -9,6 +9,8 @@ import { TicketsComponent } from './components/tickets/tickets.component';
 import { ServicosComponent } from './components/servicos/servicos.component';
 import { NotasFiscaisComponent } from './components/notas-fiscais/notas-fiscais.component';
 import { HomeComponent } from './components/home/home.component';
+import { ServicoextrasComponent } from './components/servicoextras/servicoextras.component';
+import { PagarComponent } from './components/pagar/pagar.component';
 
 const routes: Routes = [
   
@@ -20,7 +22,9 @@ const routes: Routes = [
   {path: 'ticket', component: TicketsComponent},
   {path: 'servico', component: ServicosComponent},
   {path: 'notafiscal', component: NotasFiscaisComponent},
-  {path: 'home', component: HomeComponent}
+  {path: 'home', component: HomeComponent},
+  {path: 'servicoextras', component: ServicoextrasComponent},
+  {path: 'pagar', component: PagarComponent}
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

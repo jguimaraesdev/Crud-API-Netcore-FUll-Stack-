@@ -33,6 +33,7 @@ export class MarcasComponent implements OnInit {
     const observer: Observer<Marca> = {
       next(_result): void {
         alert('Marca salva com sucesso.');
+        
       },
       error(_error): void {
         alert('Erro ao salvar!');

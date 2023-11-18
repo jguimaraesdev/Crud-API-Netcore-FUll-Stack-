@@ -5,7 +5,7 @@
         <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
             <div class="form-group">
               <label>Nome</label>
-              <input type="text" class="form-control form-control-sm" formControlName="_nomeMarca" />
+              <input type="text" class="form-control form-control-sm" formControlName="_nomeMarca" oninput="this.value = this.value.toUpperCase()"/>
             </div>
             <div class="form-acion">
                   <label>Selecione o Tipo:</label>
@@ -24,7 +24,7 @@
                   </button>
                 </div>
                 <div class="pl-1">
-                  <button type="button" class="btn btn-sm btn-light">Voltar</button>
+                  <button type="button" class="btn btn-sm btn-light" routerLink="/modelo">Voltar</button>
                 </div>
               </div>
             </div>

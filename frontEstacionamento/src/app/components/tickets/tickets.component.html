@@ -5,9 +5,9 @@
         <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
           <div class="form-group">
             <label>Codigo Ticket</label>
-            <input type="text" class="form-control form-control-sm" 
-            formControlName="_codTicket"/>
-          </div>
+              <input type="text" class="form-control form-control-sm" 
+              formControlName="_codTicket" oninput="this.value = this.value.toUpperCase()"/>
+            </div>
           <div class="form-group">
             <label>Placa</label>
             <select class="form-control form-control-sm" formControlName="_Placa">
@@ -27,12 +27,12 @@
           <div class="container">
             <div class="row">
               <div>
-                <button type="submit" class="btn btn-sm btn-outline-secondary">
+                <button type="submit" class="btn btn-sm btn-outline-secondary" routerlink="/">
                   Salvar
                 </button>
               </div>
               <div class="pl-1">
-                <button type="button" class="btn btn-sm btn-light">Voltar</button>
+                <button type="button" class="btn btn-sm btn-light" routerLink="/veiculo">Voltar</button>
               </div>
             </div>
           </div>
