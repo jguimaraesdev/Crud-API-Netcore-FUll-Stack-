@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Veiculo } from '../models/Veiculo';
-
+import { environment } from 'src/environments/environment.development';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,7 +14,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class VeiculosService {
-  apiUrl = 'http://localhost:5000/Veiculo';
+
+  private apiUrl = `${environment.ApiUrl}/Veiculo`;
+
   constructor(private http: HttpClient) { }
 
   listar(): Observable<Veiculo[]> {

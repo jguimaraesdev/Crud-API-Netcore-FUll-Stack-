@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Periodo } from '../models/Periodo';
-
+import { environment } from 'src/environments/environment.development';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,7 +15,7 @@ const httpOptions = {
 })
 
 export class PeriodosService {
-  private apiUrl = 'http://localhost:5000/Periodo'
+  private apiUrl = `${environment.ApiUrl}/Periodo`;
 
   constructor(private http: HttpClient) { }
 

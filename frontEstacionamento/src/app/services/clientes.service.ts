@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cliente } from '../models/Cliente';
-
+import { environment } from 'src/environments/environment.development';
 
 
 const httpOptions = {
@@ -15,14 +15,18 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class ClientesService {
   
-  private apiUrl = 'http://localhost:5000/Cliente';
+  private apiUrl = `${environment.ApiUrl}/Cliente`;
 
   constructor(private http: HttpClient) { }
 
   listar(): Observable<Cliente[]> {
+    
     const url = `${this.apiUrl}/listar`;
+
     return this.http.get<Cliente[]>(url);
   }
 
