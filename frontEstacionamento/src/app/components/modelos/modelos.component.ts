@@ -1,4 +1,4 @@
-
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observer } from 'rxjs';
@@ -17,8 +17,11 @@ export class ModelosComponent implements OnInit {
   tituloFormulario: string = '';
   marcas: Array<Marca> | undefined;
 
-  constructor(private modelosService : ModelosService, private marcasService: MarcasService) { }
+  constructor(private modelosService : ModelosService, 
+    private marcasService: MarcasService,
+    private router: Router) { }
 
+    
   ngOnInit(): void {
     
     this.tituloFormulario = 'Cadastro Modelo';
@@ -33,8 +36,6 @@ export class ModelosComponent implements OnInit {
     this.formulario = new FormGroup({
       _idModelo: new FormControl(null),
       _nomeModelo: new FormControl(null),
-      _motor: new FormControl(null),
-      _qtdPortas: new FormControl(null),
       _AnoModelo: new FormControl(null),
       _TipoModelo: new FormControl(null),
       _idMarca: new FormControl(null)
@@ -56,8 +57,10 @@ export class ModelosComponent implements OnInit {
     };
     if (modelo._idModelo && !isNaN(Number(modelo._idModelo))) {
       this.modelosService.alterar(modelo).subscribe(observer);
+      setTimeout(()=> this.router.navigate(["/veiculo"]), 3000)
     } else {
       this.modelosService.cadastrar(modelo).subscribe(observer);
+      setTimeout(()=> this.router.navigate(["/veiculo"]), 3000)
     }
   }
 }

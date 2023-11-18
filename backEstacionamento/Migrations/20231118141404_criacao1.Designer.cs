@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Estacionamento.Migrations
 {
     [DbContext(typeof(EstacionamentoDbContext))]
-    [Migration("20231116023732_criacao1")]
+    [Migration("20231118141404_criacao1")]
     partial class criacao1
     {
         /// <inheritdoc />
@@ -85,14 +85,8 @@ namespace Estacionamento.Migrations
                     b.Property<int?>("_idMarca")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("_motor")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("_nomeModelo")
                         .HasColumnType("TEXT");
-
-                    b.Property<int?>("_qtdPortas")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("_idModelo");
 
@@ -164,14 +158,14 @@ namespace Estacionamento.Migrations
                     b.Property<string>("NotaFiscal_NumeroNota")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("Ticket_codTicket")
+                    b.Property<int?>("Ticket_idTicket")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Veiculo_Placa")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("_codTicket")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("_codTicket")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("_tipoServico")
                         .HasColumnType("TEXT");
@@ -183,7 +177,7 @@ namespace Estacionamento.Migrations
 
                     b.HasIndex("NotaFiscal_NumeroNota");
 
-                    b.HasIndex("Ticket_codTicket");
+                    b.HasIndex("Ticket_idTicket");
 
                     b.HasIndex("Veiculo_Placa");
 
@@ -192,7 +186,7 @@ namespace Estacionamento.Migrations
 
             modelBuilder.Entity("Ticket", b =>
                 {
-                    b.Property<int?>("_codTicket")
+                    b.Property<int?>("_idTicket")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -205,10 +199,13 @@ namespace Estacionamento.Migrations
                     b.Property<string>("_Placa")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("_codTicket")
+                        .HasColumnType("TEXT");
+
                     b.Property<int?>("_idPeriodo")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("_codTicket");
+                    b.HasKey("_idTicket");
 
                     b.HasIndex("Periodo_idPeriodo");
 
@@ -294,7 +291,7 @@ namespace Estacionamento.Migrations
 
                     b.HasOne("Ticket", "Ticket")
                         .WithMany("Servicos")
-                        .HasForeignKey("Ticket_codTicket");
+                        .HasForeignKey("Ticket_idTicket");
 
                     b.HasOne("Veiculo", null)
                         .WithMany("Servicos")

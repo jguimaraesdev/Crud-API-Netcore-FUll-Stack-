@@ -93,9 +93,8 @@ public class PeriodoController : ControllerBase
         if (_context.periodo is null) return BadRequest();
         var periodotemp = await _context.periodo.FirstOrDefaultAsync(x => x._Placa == periodo._Placa);
         if (periodotemp is null) return BadRequest();
-        var data = DateTime.Now;
-        var dataformatada = data.ToString("MM/dd/yyyy H:mm"); 
-        periodotemp._HoraEntrada = dataformatada;
+        var data = DateTime.Now.ToLocalTime();
+        periodotemp._HoraEntrada = data.ToString();
         await _context.SaveChangesAsync();
         return Ok();
     }
@@ -113,9 +112,8 @@ public class PeriodoController : ControllerBase
         if (_context.periodo is null) return BadRequest();
         var periodotemp = await _context.periodo.FirstOrDefaultAsync(x => x._Placa == placa);
         if (periodotemp is null) return BadRequest();
-        var data = DateTime.Now;
-        var dataformatada = data.ToString("MM/dd/yyyy H:mm"); 
-        periodotemp._HoraSaida = dataformatada;
+        var data = DateTime.Now.ToLocalTime(); 
+        periodotemp._HoraSaida = data.ToString();
         await _context.SaveChangesAsync();
         return Ok();
     }

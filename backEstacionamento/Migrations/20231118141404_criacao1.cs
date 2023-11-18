@@ -44,8 +44,6 @@ namespace Estacionamento.Migrations
                     _idModelo = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     _nomeModelo = table.Column<string>(type: "TEXT", nullable: true),
-                    _motor = table.Column<string>(type: "TEXT", nullable: true),
-                    _qtdPortas = table.Column<int>(type: "INTEGER", nullable: true),
                     _AnoModelo = table.Column<int>(type: "INTEGER", nullable: true),
                     _TipoModelo = table.Column<string>(type: "TEXT", nullable: true),
                     _idMarca = table.Column<int>(type: "INTEGER", nullable: true),
@@ -129,8 +127,9 @@ namespace Estacionamento.Migrations
                 name: "ticket",
                 columns: table => new
                 {
-                    _codTicket = table.Column<int>(type: "INTEGER", nullable: false)
+                    _idTicket = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    _codTicket = table.Column<string>(type: "TEXT", nullable: true),
                     _Placa = table.Column<string>(type: "TEXT", nullable: true),
                     _idPeriodo = table.Column<int>(type: "INTEGER", nullable: true),
                     Veiculo_Placa = table.Column<string>(type: "TEXT", nullable: true),
@@ -138,7 +137,7 @@ namespace Estacionamento.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ticket", x => x._codTicket);
+                    table.PrimaryKey("PK_ticket", x => x._idTicket);
                     table.ForeignKey(
                         name: "FK_ticket_periodo_Periodo_idPeriodo",
                         column: x => x.Periodo_idPeriodo,
@@ -178,10 +177,10 @@ namespace Estacionamento.Migrations
                 {
                     _idServico = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    _codTicket = table.Column<int>(type: "INTEGER", nullable: true),
+                    _codTicket = table.Column<string>(type: "TEXT", nullable: true),
                     _tipoServico = table.Column<string>(type: "TEXT", nullable: true),
                     _valorServico = table.Column<double>(type: "REAL", nullable: true),
-                    Ticket_codTicket = table.Column<int>(type: "INTEGER", nullable: true),
+                    Ticket_idTicket = table.Column<int>(type: "INTEGER", nullable: true),
                     NotaFiscal_NumeroNota = table.Column<string>(type: "TEXT", nullable: true),
                     Veiculo_Placa = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -194,10 +193,10 @@ namespace Estacionamento.Migrations
                         principalTable: "notafiscal",
                         principalColumn: "_NumeroNota");
                     table.ForeignKey(
-                        name: "FK_servico_ticket_Ticket_codTicket",
-                        column: x => x.Ticket_codTicket,
+                        name: "FK_servico_ticket_Ticket_idTicket",
+                        column: x => x.Ticket_idTicket,
                         principalTable: "ticket",
-                        principalColumn: "_codTicket");
+                        principalColumn: "_idTicket");
                     table.ForeignKey(
                         name: "FK_servico_veiculo_Veiculo_Placa",
                         column: x => x.Veiculo_Placa,
@@ -236,9 +235,9 @@ namespace Estacionamento.Migrations
                 column: "NotaFiscal_NumeroNota");
 
             migrationBuilder.CreateIndex(
-                name: "IX_servico_Ticket_codTicket",
+                name: "IX_servico_Ticket_idTicket",
                 table: "servico",
-                column: "Ticket_codTicket");
+                column: "Ticket_idTicket");
 
             migrationBuilder.CreateIndex(
                 name: "IX_servico_Veiculo_Placa",

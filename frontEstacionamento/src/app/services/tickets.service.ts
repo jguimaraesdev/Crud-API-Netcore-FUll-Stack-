@@ -28,6 +28,11 @@ export class TicketsService {
     const url = `${this.apiUrl}/buscar/${id}`;
     return this.http.get<Ticket>(url);
   }
+  
+  buscarCOD(codigo : string): Observable<Ticket> {
+    const url = `${this.apiUrl}/buscar/${codigo}`;
+    return this.http.get<Ticket>(url);
+  }
 
   cadastrar(ticket: Ticket): Observable<any> {
     const url = `${this.apiUrl}/cadastrar`;

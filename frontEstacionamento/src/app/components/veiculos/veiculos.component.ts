@@ -5,7 +5,7 @@ import { Veiculo } from '../../models/Veiculo';
 import { Modelo } from 'src/app/models/Modelo';
 import { ModelosService } from 'src/app/services/modelos.service';
 import { Observer} from 'rxjs';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-veiculo',
@@ -21,8 +21,12 @@ export class VeiculosComponent implements OnInit {
   
 
 
-  constructor(private veiculosService : VeiculosService, private modelosService : ModelosService) { }
+  constructor(private veiculosService : VeiculosService, 
+    private modelosService : ModelosService,
+    private router: Router) { }
 
+
+    
   ngOnInit(): void {
 
     this.tituloFormulario = 'Cadastro Veiculo';
@@ -60,8 +64,10 @@ export class VeiculosComponent implements OnInit {
     
     if (veiculo._Placa && !isNaN (Number(veiculo._Placa))){
       this.veiculosService.alterar(veiculo).subscribe(observer);
+      setTimeout(()=> this.router.navigate(["/servico"]), 3000)
     }else{
       this.veiculosService.cadastrar(veiculo).subscribe(observer);
+      setTimeout(()=> this.router.navigate(["/servico"]), 3000)
     }
   }
 }

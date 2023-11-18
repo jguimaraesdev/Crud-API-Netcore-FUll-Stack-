@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 public class Ticket
 {   
     [Key]
-    public  int? _codTicket {get; set;}
+    public int? _idTicket{get;set;}
+    public string? _codTicket {get; set;}
     public string? _Placa {get; set;}
     public int? _idPeriodo{get;set;}
 

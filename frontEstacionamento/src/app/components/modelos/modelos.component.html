@@ -5,17 +5,7 @@
         <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
           <div class="form-group">
             <label>Nome Modelo</label>
-            <input type="text" class="form-control form-control-sm" oninput="this.value = this.value.toUpperCase()"/>
-          </div>
-          <div class="form-group">
-            <label>Motor</label>
-            <input type="text" class="form-control form-control-sm" 
-            formControlName="_motor"/>
-          </div>
-          <div class="form-group">
-            <label>Quantidade Portas</label>
-            <input type="text" class="form-control form-control-sm" 
-            formControlName="_qtdPortas"/>
+            <input type="text" class="form-control form-control-sm" oninput="this.value = this.value.toUpperCase()" formControlName="_nomeModelo"/>
           </div>
           <div class="form-group">
             <label>Ano Modelo</label>

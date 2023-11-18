@@ -37,6 +37,7 @@ export class ServicosComponent implements OnInit {
     this.formulario = new FormGroup({
       _idServico: new FormControl(null),
       _codTicket: new FormControl(null),
+      _tipoServico: new FormControl(null),
       _valorServico: new FormControl(null)
 
     })
@@ -47,6 +48,7 @@ export class ServicosComponent implements OnInit {
     const observer: Observer<Servico> = {
       next(_result): void {
         alert('Servico salvo com sucesso.');
+        
       },
       error(_error): void {
         alert('Erro ao salvar!');

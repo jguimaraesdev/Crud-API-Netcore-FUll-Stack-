@@ -1,4 +1,7 @@
 ﻿
+using System.Data.Entity;
+using System.Runtime.ExceptionServices;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -43,11 +46,23 @@ using Microsoft.EntityFrameworkCore;
             {
                 if (_context is null) return BadRequest();
                 if (_context.ticket is null) return BadRequest();
-                var tickettemp = await _context.ticket.FirstOrDefaultAsync(X =>X._codTicket == id);
+                var tickettemp = await _context.ticket.FindAsync(id);
                 if (tickettemp is null) return BadRequest();
                 return tickettemp;
             }
 
+            //--------------------------------------------------------------------//
+
+            [HttpGet()]
+            [Route("buscar/{COD}")]
+            public async Task<ActionResult<Ticket>> BuscarCOD(string codigo)
+            {
+                if (_context is null) return BadRequest();
+                if (_context.ticket is null) return BadRequest();
+                var tickettemp = await _context.ticket.FirstOrDefaultAsync(x =>x._codTicket == codigo);
+                if (tickettemp is null) return BadRequest();
+                return tickettemp;
+            }
 
             //--------------------------------------------------------------------//
             [HttpPost()]

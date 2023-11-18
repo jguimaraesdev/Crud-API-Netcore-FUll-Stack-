@@ -105,7 +105,7 @@ using Microsoft.EntityFrameworkCore;
         /*
         [HttpPut]
         [Route("update/ValorPagar")]
-        public async Task<IActionResult> UpdateValorPagar(int ordemservico, double valor)
+        public async Task<IActionResult> UpdateValorPagar(string codigoticket, double valor)
         {
             if (_context is null) return BadRequest();
             if (_context.servico is null) return BadRequest();

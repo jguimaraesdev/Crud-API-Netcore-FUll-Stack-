@@ -4,26 +4,10 @@
         <h6>{{ tituloFormulario }}</h6>
         <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
           <div class="form-group">
-            <label>Codigo Ticket</label>
+            <label> Digite a Placa</label>
               <input type="text" class="form-control form-control-sm" 
-              formControlName="_codTicket" oninput="this.value = this.value.toUpperCase()"/>
-            </div>
-          <div class="form-group">
-            <label>Placa</label>
-            <select class="form-control form-control-sm" formControlName="_Placa">
-              <option *ngFor="let veiculo of veiculos" [value]= "veiculo._Placa">
-                {{ veiculo._Placa }}
-              </option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Periodo</label>
-            <select class="form-control form-control-sm" formControlName="_idPeriodo">
-              <option *ngFor="let periodo of periodos" [value]= "periodo._idPeriodo">
-                {{ periodo._HoraEntrada}}
-              </option>
-            </select>
-        </div>
+              formControlName="_Placa" oninput="this.value = this.value.toUpperCase()"/>
+          </div>
           <div class="container">
             <div class="row">
               <div>
@@ -41,3 +25,13 @@
     </div>
 </div>
 
+<!--
+  <div class="form-group">
+            <label>Periodo</label>
+            <select class="form-control form-control-sm" formControlName="_idPeriodo">
+              <option *ngFor="let periodo of periodos" [value]= "periodo._idPeriodo">
+                {{ periodo._HoraEntrada}}
+              </option>
+            </select>
+        </div>
+-->

@@ -26,6 +26,7 @@
             <select class="form-control form-control-sm" formControlName="_idServico">
               <option *ngFor="let servico of servicos" [value]="servico._idServico">
                 {{ servico._idServico }}
+                {{ servico._valorServico }}
               </option>
             </select>
         </div>
