@@ -4,7 +4,7 @@ public class NotaFiscal
 {
     [Key]
     
-    public string? _NumeroNota { get; set; }
+    public int? _NumeroNota { get; set; }
     public double? _ValorDaNota { get; set; }
     public String? _Cpf{  get; set; }
     public int? _idServico {  get; set; }

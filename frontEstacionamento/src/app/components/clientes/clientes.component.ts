@@ -3,6 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { Cliente } from 'src/app/models/Cliente';
 import { Observer } from 'rxjs';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-cliente',
@@ -13,7 +15,7 @@ export class ClientesComponent implements OnInit {
   formulario: any;
   tituloFormulario: string = '';
   
-  constructor(private clientesService : ClientesService) { }
+  constructor(private clientesService : ClientesService, private router: Router) { }
 
   ngOnInit(): void {
     this.tituloFormulario = 'Novo Cliente';
@@ -41,8 +43,13 @@ export class ClientesComponent implements OnInit {
     /*
     if (cliente._Cpf && !isNaN(Number(cliente._Cpf))) {
       this.clientesService.alterar(cliente).subscribe(observer);
+
+      setTimeout(()=> this.router.navigate(["/notafiscal"]), 3000);
+
     } else {*/
       this.clientesService.cadastrar(cliente).subscribe(observer);
-    
+      
+      setTimeout(()=> this.router.navigate(["/notafiscal"]), 3000);
   }
 }
+

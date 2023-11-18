@@ -28,7 +28,7 @@ public class NotaController : ControllerBase
 
     [HttpGet()]
     [Route("buscar/{numeroNota}")]
-    public async Task<ActionResult<NotaFiscal>> Buscar(string NumeroNota)
+    public async Task<ActionResult<NotaFiscal>> Buscar(int NumeroNota)
     {
          if (_context is null) return BadRequest();
         if (_context.notafiscal is null) return BadRequest();
@@ -69,7 +69,7 @@ public class NotaController : ControllerBase
 
     [HttpDelete]
     [Route("excluir/{numeroNota}")]
-    public async Task<IActionResult> Excluir(string numeronota)
+    public async Task<IActionResult> Excluir(int numeronota)
     {
         if (_context is null) return BadRequest();
         if (_context.notafiscal is null) return BadRequest();

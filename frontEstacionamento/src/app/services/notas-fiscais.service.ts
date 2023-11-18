@@ -24,7 +24,7 @@ export class NotaFiscalService {
     return this.http.get<NotaFiscal[]>(url);
   }
 
-  buscar(numeroNota : string): Observable<NotaFiscal> {
+  buscar(numeroNota : number): Observable<NotaFiscal> {
     const url = `${this.apiUrl}/buscar/${numeroNota}`;
     return this.http.get<NotaFiscal>(url);
   }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Estacionamento.Migrations
 {
     [DbContext(typeof(EstacionamentoDbContext))]
-    [Migration("20231118141404_criacao1")]
+    [Migration("20231118190044_criacao1")]
     partial class criacao1
     {
         /// <inheritdoc />
@@ -97,8 +97,9 @@ namespace Estacionamento.Migrations
 
             modelBuilder.Entity("NotaFiscal", b =>
                 {
-                    b.Property<string>("_NumeroNota")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("_NumeroNota")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Cliente_Cpf")
                         .HasColumnType("TEXT");
@@ -155,8 +156,8 @@ namespace Estacionamento.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("NotaFiscal_NumeroNota")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("NotaFiscal_NumeroNota")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("Ticket_idTicket")
                         .HasColumnType("INTEGER");

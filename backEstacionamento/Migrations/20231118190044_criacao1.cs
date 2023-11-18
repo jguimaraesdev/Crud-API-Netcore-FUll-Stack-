@@ -154,7 +154,8 @@ namespace Estacionamento.Migrations
                 name: "notafiscal",
                 columns: table => new
                 {
-                    _NumeroNota = table.Column<string>(type: "TEXT", nullable: false),
+                    _NumeroNota = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     _ValorDaNota = table.Column<double>(type: "REAL", nullable: true),
                     _Cpf = table.Column<string>(type: "TEXT", nullable: true),
                     _idServico = table.Column<int>(type: "INTEGER", nullable: true),
@@ -181,7 +182,7 @@ namespace Estacionamento.Migrations
                     _tipoServico = table.Column<string>(type: "TEXT", nullable: true),
                     _valorServico = table.Column<double>(type: "REAL", nullable: true),
                     Ticket_idTicket = table.Column<int>(type: "INTEGER", nullable: true),
-                    NotaFiscal_NumeroNota = table.Column<string>(type: "TEXT", nullable: true),
+                    NotaFiscal_NumeroNota = table.Column<int>(type: "INTEGER", nullable: true),
                     Veiculo_Placa = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>

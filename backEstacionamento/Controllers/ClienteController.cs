@@ -1,3 +1,4 @@
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,16 +8,16 @@ using Microsoft.EntityFrameworkCore;
 public class ClienteController : ControllerBase
 {
     private EstacionamentoDbContext _dbContext;
-    public ClienteController(EstacionamentoDbContext context)
+    public ClienteController(EstacionamentoDbContext dbContext)
     {
-        _dbContext = context;
+        _dbContext = dbContext;
     }
 
     //--------------------------------------------------------------------//
 
     [HttpGet]
     [Route("listar")]
-    public async Task<ActionResult<IEnumerable<Cliente>>> Listar()
+    public async Task<ActionResult<IEnumerable<Cliente>>>Listar()
     {
         if(_dbContext is null) return BadRequest();
         if(_dbContext.cliente is null) return BadRequest();
@@ -27,7 +28,7 @@ public class ClienteController : ControllerBase
 
     [HttpGet]
     [Route("buscar/{cpf}")]
-    public async Task<ActionResult<Cliente>> Buscar(string cpf)
+    public async Task<ActionResult<Cliente>>Buscar(string cpf)
     {
         if(_dbContext is null) return BadRequest();
         if(_dbContext.cliente is null) return BadRequest();
@@ -36,29 +37,29 @@ public class ClienteController : ControllerBase
         return clienteTemp;
     }
 
-     //--------------------------------------------------------------------//
+    //--------------------------------------------------------------------//
 
     [HttpPost]
     [Route("cadastrar")]
-    public async Task<ActionResult> Cadastrar(Cliente cliente)
+    public async Task<ActionResult>Cadastrar(Cliente cliente)
     {
-        if(_dbContext is null) return BadRequest();
+       if (_dbContext is null) return BadRequest();
         await _dbContext.AddAsync(cliente);
         await _dbContext.SaveChangesAsync();
         return Created("", cliente);
     }
 
-     //--------------------------------------------------------------------//
+    //--------------------------------------------------------------------//
 
     [HttpPut()]
     [Route("alterar")]
-    public async Task<ActionResult> Alterar(Cliente cliente)
+    public async Task<ActionResult>Alterar(Cliente cliente)
     {
         if(_dbContext is null) return BadRequest();
         if(_dbContext.cliente is null) return BadRequest();
-        var clienteTemp = await _dbContext.cliente.FindAsync(cliente._Cpf);
+        var clienteTemp = await _dbContext.cliente.FindAsync(cliente);
         if(clienteTemp is null) return BadRequest();
-        clienteTemp._Nome = cliente._Nome;
+        clienteTemp._Cpf = cliente._Cpf;
         await _dbContext.SaveChangesAsync();
         return Ok();
     }
@@ -68,7 +69,7 @@ public class ClienteController : ControllerBase
 
     [HttpDelete()]
     [Route("excluir/{cpf}")]
-    public async Task<ActionResult> Excluir(string cpf)
+    public async Task<ActionResult>Excluir(string  cpf)
     {
         if(_dbContext is null) return BadRequest();
         if(_dbContext.cliente is null) return BadRequest();
@@ -80,17 +81,4 @@ public class ClienteController : ControllerBase
     }
 
      //--------------------------------------------------------------------//
-    /*
-    [HttpPatch]
-    [Route("modificaremail/{cpf}")]
-    public async Task<IActionResult> ModificarEmail(string Cpf, [FromForm] string newEmail)
-    {
-        var cliente = await _context.cliente.FindAsync(Cpf);
-        if (_context.cliente is null) return NotFound();
-        cliente._Email = newEmail;
-        await _context.SaveChangesAsync();
-        return Ok();
-    }
-
-   */
 }

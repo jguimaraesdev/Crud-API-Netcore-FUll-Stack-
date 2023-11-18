@@ -36,7 +36,7 @@ export class TicketsComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.tituloFormulario = 'Novo Ticket';
+    this.tituloFormulario = 'Novo Entrada / Ticket';
     
     this.formulario = new FormGroup({
       _idTicket: new FormControl(null),
