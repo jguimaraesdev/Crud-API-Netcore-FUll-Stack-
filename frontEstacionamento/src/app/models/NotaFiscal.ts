@@ -5,6 +5,6 @@ export class NotaFiscal
 {
     _NumeroNota?: number;
     _ValorDaNota: number = 0.0;
-    _Cpf: Cliente |undefined;
-    _idServico?: Servico | undefined;
+    _Cpf: Cliente = new Cliente();
+    _idServico?: Servico = new Servico();
 }

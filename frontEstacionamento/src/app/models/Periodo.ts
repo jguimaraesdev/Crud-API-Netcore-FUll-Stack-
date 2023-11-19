@@ -6,6 +6,6 @@ export class Periodo
     _HoraEntrada: string ="";
     _HoraSaida: string = "";
     _Placa: string = "";
-    _Veiculo: Veiculo | undefined;
+    _Veiculo: Veiculo = new Veiculo();
 
 }

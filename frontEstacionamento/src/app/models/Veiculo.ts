@@ -4,7 +4,7 @@ export class Veiculo
 {
     _Placa: string = "";
     _Cor: string = "";
-    _idModelo?: Modelo |undefined; 
+    _idModelo?: Modelo = new Modelo(); 
     
 
     

@@ -15,8 +15,11 @@ export class PagarComponent {
 
   listaservicos: Array<Servico> = new Array;
   listaservico: Array<Servico> = new Array;
+  
+
 
   constructor(private servicoService : ServicosService){}
+  
 
   ngOnInit(): void{
 
@@ -35,6 +38,16 @@ export class PagarComponent {
     });
 
   }
+ 
 
-
+  search(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const value = target.value.toLowerCase; // Transforma o valor para minúsculas
+  
+    this.listaservico = this.listaservicos.filter(servicos => {
+      return servicos._idServico === Number(value);
+    })
+  }
+  
+  
 }

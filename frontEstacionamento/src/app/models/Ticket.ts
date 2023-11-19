@@ -5,6 +5,6 @@ export class Ticket{
 
     _idTicket: number =0;
     _codTicket: string="";
-    _Placa?: Veiculo | undefined;
-    _idPeriodo?: Periodo |undefined;
+    _Placa?: Veiculo = new Veiculo();
+    _idPeriodo?: Periodo = new Periodo();
 }

@@ -5,6 +5,6 @@ export class Modelo {
     _nomeModelo: String = "";
     _AnoModelo: number=0;
     _TipoModelo: String = "";
-    _idMarca: Marca | undefined;
+    _idMarca: Marca = new Marca();
 }
 
