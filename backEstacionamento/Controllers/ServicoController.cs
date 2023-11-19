@@ -52,12 +52,12 @@ using Microsoft.EntityFrameworkCore;
 
         [HttpPost()]
         [Route("cadastrar")]
-        public async Task<IActionResult> Cadastrar(Servico newservico)
+        public async Task<IActionResult> Cadastrar(Servico servico)
         {
              if (_context is null) return BadRequest();
-            await _context.AddAsync(newservico);
+            await _context.AddAsync(servico);
             await _context.SaveChangesAsync();
-            return Created("",newservico);
+            return Created("",servico);
             
         }
 
@@ -83,18 +83,14 @@ using Microsoft.EntityFrameworkCore;
        
 
         [HttpPut]
-        [Route("update/ValorServico")]
-        public async Task<IActionResult> UpdateValorServico(int _idServico, double valor)
+        [Route("update/tiposervico")]
+        private async Task<IActionResult> updatetiposervico(Servico servico)
         {
             if (_context is null) return BadRequest();
             if (_context.servico is null) return BadRequest();
-            var servicotemp = await _context.servico.FirstOrDefaultAsync(x =>x._idServico == _idServico);
+            var servicotemp = await _context.servico.FindAsync(servico._idServico);
             if (servicotemp is null) return BadRequest();
-            	
-            servicotemp._valorServico = valor;
-            
-            await _context.SaveChangesAsync();
-            
+
             return Ok();
         }
 

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Estacionamento.Migrations
 {
     [DbContext(typeof(EstacionamentoDbContext))]
-    [Migration("20231118190044_criacao1")]
+    [Migration("20231118232959_criacao1")]
     partial class criacao1
     {
         /// <inheritdoc />
@@ -164,6 +164,9 @@ namespace Estacionamento.Migrations
 
                     b.Property<string>("Veiculo_Placa")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool?>("_Pagamento")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("_codTicket")
                         .HasColumnType("TEXT");

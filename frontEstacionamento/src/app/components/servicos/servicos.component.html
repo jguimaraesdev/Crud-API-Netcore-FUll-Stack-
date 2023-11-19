@@ -4,30 +4,26 @@
       <h6>{{ tituloFormulario }}</h6>
       <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
         <div class="form-group">
-          <label>Código Servico</label>
-          <input type="text" class="form-control form-control-sm" 
-          formControlName="_idServico"/>
-        </div>
-        <div class="form-group">
           <label>Código Ticket</label>
-          <select class="form-control form-control-sm" formControlName="_idMarca">
-            <option *ngFor="let ticket of tickets" [value]= "ticket._codTicket">
-              {{ ticket._codTicket}} 
+          <select class="form-control form-control-sm" formControlName="_codTicket">
+            <option *ngFor="let ticket of tickets" [value]="ticket._codTicket">
+              {{ ticket._codTicket}} Placa 
+              {{ ticket._Placa}} 
             </option>
           </select>
         </div>
         <div class="form-action">
-          <label>Selecione o Servico:</label>
-          <select class="form-control" formControlName="_valorServico" formControlName="_tipoServico">
-            <option value= 250.00 value="Estetica">Estética</option>
-            <option value= 150.00 value="Higienizacao">Higienização</option>
+          <label>Selecione o tipo:</label>
+          <select class="form-control form-control-sm" formControlName="_valorServico" >
+            <option [ngValue]="'250.00'">Estética</option>
+            <option [ngValue]="'150.00'">Higienização</option>
           </select>
         </div>
         <div class="container">
           <div class="row">
             <div>
               <div>
-              <button type="submit" class="btn btn-sm btn-outline-secondary">
+              <button type="submit" class="btn btn-primary btn-sm">
                 Salvar
               </button>
             </div>

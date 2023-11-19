@@ -9,8 +9,7 @@ public class Servico
 	public  String? _codTicket {get; set;}
 	public String? _tipoServico{get;set;}
     public double? _valorServico { get; set; }
-    
-
+	public Boolean? _Pagamento{get;set;}
 	//-------------------------------------------------------------------------
 	public Ticket? Ticket{get;set;}
 	

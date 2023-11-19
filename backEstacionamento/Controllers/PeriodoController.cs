@@ -61,7 +61,7 @@ public class PeriodoController : ControllerBase
         if (_context is null) return BadRequest();
         await _context.AddAsync(periodo);
         await _context.SaveChangesAsync();
-        updateEntrada(periodo);//para inserir a data de entrada automaticamente
+        await updateEntrada(periodo);//para inserir a data de entrada automaticamente
         return Created("",periodo);
         
     }

@@ -6,4 +6,5 @@ export class Servico
     _codTicket: Ticket | undefined;
     _tipoServico: string = "";
     _valorServico: number=0.0;
+    _Pagamento: boolean = false;
 }

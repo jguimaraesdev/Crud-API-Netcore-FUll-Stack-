@@ -108,9 +108,9 @@ namespace Estacionamento.Migrations
                 {
                     _idPeriodo = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    _Placa = table.Column<string>(type: "TEXT", nullable: true),
                     _HoraEntrada = table.Column<string>(type: "TEXT", nullable: true),
                     _HoraSaida = table.Column<string>(type: "TEXT", nullable: true),
-                    _Placa = table.Column<string>(type: "TEXT", nullable: true),
                     Veiculo_Placa = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -181,6 +181,7 @@ namespace Estacionamento.Migrations
                     _codTicket = table.Column<string>(type: "TEXT", nullable: true),
                     _tipoServico = table.Column<string>(type: "TEXT", nullable: true),
                     _valorServico = table.Column<double>(type: "REAL", nullable: true),
+                    _Pagamento = table.Column<bool>(type: "INTEGER", nullable: true),
                     Ticket_idTicket = table.Column<int>(type: "INTEGER", nullable: true),
                     NotaFiscal_NumeroNota = table.Column<int>(type: "INTEGER", nullable: true),
                     Veiculo_Placa = table.Column<string>(type: "TEXT", nullable: true)

@@ -162,6 +162,9 @@ namespace Estacionamento.Migrations
                     b.Property<string>("Veiculo_Placa")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool?>("_Pagamento")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("_codTicket")
                         .HasColumnType("TEXT");
 

@@ -11,21 +11,28 @@
     <thead>
         <tr>
             <th></th>
-            <th>Nome</th>
-            <th>Sobrenome</th>
-            <th>Departamento</th>
-            <th></th>
+            <th>id Servico</th>
+            <th>Cod Ticket</th>
+            <th>Tipo Serviço</th>
+            <th>Valor Serviço</th>
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody *ngFor= "let servico of listaservicos">
         <tr>
-           
-            <img cImg height="30" rounded src="assets/images/ativo.png" class="rounded-circle" thumbnail width="30" alt=""/>
-            <img cImg height="30" rounded src="assets/images/inativo.png" class="rounded-circle" thumbnail width="30" alt=""/>
-            <td>Eduado</td>
-            <td>Carlos</td>
-            <td>RH</td>
+           <td>
+            <div ngif="servico._Pagamento == true; else inativo">
+                <img cImg height="30" rounded src="assets/images/ativo.png" class="rounded-circle" thumbnail width="30" alt=""/>
+            </div>
+            <ng-template #inativo>
+                <img cImg height="30" rounded src="assets/images/inativo.png" class="rounded-circle" thumbnail width="30" alt=""/>
+            </ng-template>
+            </td>
+            <td>{{servico._idServico}}</td>
+            <td>{{servico._codTicket}}</td>
+            <td>{{servico._tipoServico}}</td>
+            <td>{{servico._valorServico}}</td>
+            <td>{{servico._Pagamento}}</td>
             <td>
                 <button type="button" class="btn btn-warning btn-sm">Editar</button>
                 <button type="button" class="btn btn-secondary btn-sm">Detalhes</button>
