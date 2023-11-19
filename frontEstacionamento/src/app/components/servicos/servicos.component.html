@@ -5,7 +5,7 @@
       <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
         <div class="form-group">
           <label>Código Ticket</label>
-          <select class="form-control form-control-sm" formControlName="_codTicket">
+          <select class="form-control form-control-sm" formControlName="_codTicket" required>
             <option *ngFor="let ticket of tickets" [value]="ticket._codTicket">
               {{ ticket._codTicket}} Placa 
               {{ ticket._Placa}} 
@@ -14,7 +14,7 @@
         </div>
         <div class="form-action">
           <label>Selecione o tipo:</label>
-          <select class="form-control form-control-sm" formControlName="_valorServico" >
+          <select class="form-control form-control-sm" formControlName="_valorServico" required>
             <option [ngValue]="'250.00'">Estética</option>
             <option [ngValue]="'150.00'">Higienização</option>
           </select>

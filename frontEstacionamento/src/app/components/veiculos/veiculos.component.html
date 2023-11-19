@@ -6,11 +6,11 @@
       <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
         <div class="form-group">
           <label>Placa</label>
-          <input type="text" class="form-control form-control-sm" formControlName="_Placa" oninput="this.value = this.value.toUpperCase()"/>
+          <input type="text" class="form-control form-control-sm" formControlName="_Placa" oninput="this.value = this.value.toUpperCase()" required/>
         </div>
         <div class="form-action">
           <label>Selecione a Cor:</label>
-            <select class="form-control" formControlName="_Cor">
+            <select class="form-control" formControlName="_Cor" required>
               <option value="Preto">Preto</option>
               <option value="Branco">Branco</option>
               <option value="Prata">Prata</option>
@@ -20,7 +20,7 @@
           </div>
         <div class="form-group">
           <label>Modelo</label>
-          <select class="form-control form-control-sm" formControlName= "_idModelo">
+          <select class="form-control form-control-sm" formControlName= "_idModelo" required>
             <option *ngFor="let modelo of listamodelos" [value]= "modelo._idModelo">
               {{ modelo._nomeModelo }} 
               {{ modelo._TipoModelo }}

@@ -5,15 +5,15 @@
         <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
           <div class="form-group">
             <label>CPF</label>
-            <input type="text" class="form-control form-control-sm" formControlName="_Cpf"/>
+            <input type="text" class="form-control form-control-sm" formControlName="_Cpf" required/>
           </div>
           <div class="form-group">
             <label>Nome</label>
-            <input type="text" class="form-control form-control-sm" formControlName="_Nome"/>
+            <input type="text" class="form-control form-control-sm" formControlName="_Nome" required/>
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input type="text" class="form-control form-control-sm" formControlName="_Email"/>
+            <input type="text" class="form-control form-control-sm" formControlName="_Email" required/>
           </div>
           <div class="container">
             <div class="row">

@@ -5,16 +5,16 @@
         <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
           <div class="form-group">
             <label>Nome Modelo</label>
-            <input type="text" class="form-control form-control-sm" oninput="this.value = this.value.toUpperCase()" formControlName="_nomeModelo"/>
+            <input type="text" class="form-control form-control-sm" oninput="this.value = this.value.toUpperCase()" formControlName="_nomeModelo" required/>
           </div>
           <div class="form-group">
             <label>Ano Modelo</label>
             <input type="text" class="form-control form-control-sm" 
-            formControlName="_AnoModelo"/>
+            formControlName="_AnoModelo" required/>
           </div>
           <div class="form-group">
             <label>Nome Marca</label>
-            <select class="form-control form-control-sm" formControlName="_idMarca">
+            <select class="form-control form-control-sm" formControlName="_idMarca" required>
               <option *ngFor="let marca of marcas" [value]= "marca._idMarca">
                 {{ marca._nomeMarca }} 
               </option>
@@ -22,7 +22,7 @@
           </div>
           <div class="form-action">
             <label>Selecione o Tipo:</label>
-            <select class="form-control" formControlName="_TipoModelo">
+            <select class="form-control" formControlName="_TipoModelo" required>
               <option value="Hatch">Hatch</option>
               <option value="Sedã">Sedã</option>
               <option value="Suv">Suv</option>

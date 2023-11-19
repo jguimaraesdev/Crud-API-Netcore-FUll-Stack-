@@ -5,11 +5,11 @@
         <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
             <div class="form-group">
               <label>Nome</label>
-              <input type="text" class="form-control form-control-sm" formControlName="_nomeMarca" oninput="this.value = this.value.toUpperCase()"/>
+              <input type="text" class="form-control form-control-sm" formControlName="_nomeMarca" oninput="this.value = this.value.toUpperCase()" required/>
             </div>
             <div class="form-acion">
                   <label>Selecione o Tipo:</label>
-                  <select class="form-control" formControlName="_segmento">
+                  <select class="form-control" formControlName="_segmento" required>
                     <option value="Automóveis">Automóveis</option>
                     <option value="Motocicletas">Motocicletas</option>
                     <option value="Onibus">Onibus</option>

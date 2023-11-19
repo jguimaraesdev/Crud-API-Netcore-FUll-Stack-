@@ -7,6 +7,7 @@ import { Servico } from 'src/app/models/Servico';
 import { ServicosService } from 'src/app/services/servicos.service';
 import { NotaFiscalService } from 'src/app/services/notas-fiscais.service';
 import { NotaFiscal } from 'src/app/models/NotaFiscal';
+import { PeriodosService } from 'src/app/services/periodos.service';
 
 @Component({
   selector: 'app-notafiscal',
@@ -22,7 +23,8 @@ export class NotasFiscaisComponent implements OnInit {
 
   constructor(private notaFiscalService : NotaFiscalService, 
     private clientesService: ClientesService, 
-    private servicosService: ServicosService) { }
+    private servicosService: ServicosService,
+    private periodoService: PeriodosService) { }
 
 
   ngOnInit(): void {
@@ -68,5 +70,11 @@ export class NotasFiscaisComponent implements OnInit {
     } else {
       this.notaFiscalService.cadastrar(notas).subscribe(observer);
     }
+  }
+
+  encerrarHorário(): void{
+
+    //alguma coisa aqui que encerre o horário e calcule o valor.
+
   }
 }
