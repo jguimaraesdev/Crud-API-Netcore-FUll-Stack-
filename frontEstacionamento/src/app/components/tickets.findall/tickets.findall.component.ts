@@ -50,8 +50,32 @@ export class TicketsFindallComponent {
       return tickets._idTicket === Number(value);
     })
   }
-  
+
+  excluirRegistro(id?: number): void {
+    
+    if (id !== undefined) {
+      // Lógica de exclusão aqui...
+      this.ticketservice.excluir(id).subscribe({
+        next: () => {
+          alert('Registro excluído com sucesso.');
+          // Lógica adicional após a exclusão, se necessário
+        },
+        error: (error) => {
+          console.error('Erro ao excluir:', error);
+          alert('Erro ao excluir o registro.');
+        },
+        complete: () => {
+          // Lógica adicional após a conclusão da exclusão, se necessário
+        },
+      });
+    } else {
+      // Lidar com a situação em que 'id' é undefined
+      console.error('ID não fornecido para excluirRegistro');
+    }
+  }
   
 }
+  
+
 
 

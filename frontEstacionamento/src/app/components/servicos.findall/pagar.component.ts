@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Observer } from 'rxjs';
 import { Servico } from 'src/app/models/Servico';
 import { Ticket } from 'src/app/models/Ticket';
 import { ServicosService } from 'src/app/services/servicos.service';
@@ -32,11 +33,6 @@ export class PagarComponent {
       console.log(servicos);
       this.listaservicos = servicos;
       this.listaservico = servicos;
-
-      /*
-      if (this.listaservicos && this.listaservicos.length > 0) {
-        this.formulario.get('_idServico')?.setValue(this.listaservicos[0]._idServico);
-      }*/
     });
 
   }
@@ -48,8 +44,32 @@ export class PagarComponent {
   
     this.listaservico = this.listaservicos.filter(servicos => {
       return servicos._idServico === Number(value);
-    })
+    });
   }
   
-  
-}
+
+  excluirRegistro(id?: number): void {
+    
+      if (id !== undefined) {
+        // Lógica de exclusão aqui...
+        this.servicoService.excluir(id).subscribe({
+          next: () => {
+            alert('Registro excluído com sucesso.');
+            // Lógica adicional após a exclusão, se necessário
+          },
+          error: (error) => {
+            console.error('Erro ao excluir:', error);
+            alert('Erro ao excluir o registro.');
+          },
+          complete: () => {
+            // Lógica adicional após a conclusão da exclusão, se necessário
+          },
+        });
+      } else {
+        // Lidar com a situação em que 'id' é undefined
+        console.error('ID não fornecido para excluirRegistro');
+      }
+    }
+    
+  }
+
