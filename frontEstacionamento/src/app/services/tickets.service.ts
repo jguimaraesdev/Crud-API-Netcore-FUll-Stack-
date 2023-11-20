@@ -31,11 +31,6 @@ export class TicketsService {
     return this.http.get<Ticket>(url);
   }
   
-  buscarCOD(codigo : string): Observable<Ticket> {
-    const url = `${this.apiUrl}/buscar/${codigo}`;
-    return this.http.get<Ticket>(url);
-  }
-
   cadastrar(ticket: Ticket): Observable<any> {
     const url = `${this.apiUrl}/cadastrar`;
     return this.http.post<any>(url, ticket, httpOptions);
