@@ -1,4 +1,5 @@
 ﻿
+using System.Runtime.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -76,13 +77,14 @@ using Microsoft.EntityFrameworkCore;
 
     [HttpPut]
     [Route("alterar")]
-    public async Task<IActionResult> Alterar(Ticket ticket)
+    public async Task<IActionResult>alterar(Ticket ticket)
     {
         if (_dbContext is null) return BadRequest();
         if (_dbContext.ticket is null) return BadRequest();
-        var tickettemp = await _dbContext.ticket.FindAsync(ticket._codTicket);
+        var tickettemp = await _dbContext.ticket.FirstOrDefaultAsync(x => x._idTicket==ticket._idTicket);
         if (tickettemp is null) return BadRequest();
-        tickettemp._idTicket = ticket._idTicket;
+        tickettemp._HoraSaida = ticket._HoraSaida;
+        tickettemp._Pagamento=ticket._Pagamento;
         await _dbContext.SaveChangesAsync();
         return Ok();
     }
@@ -103,6 +105,6 @@ using Microsoft.EntityFrameworkCore;
     }
 
      //--------------------------------------------------------------------//    
-        
+
     }
 

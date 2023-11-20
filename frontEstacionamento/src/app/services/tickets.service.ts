@@ -49,5 +49,7 @@ export class TicketsService {
   excluir(id: number): Observable<any> {
     const url = `${this.apiUrl}/excluir/${id}`;
     return this.http.delete<any>(url, httpOptions);
+ 
   }
+
 }

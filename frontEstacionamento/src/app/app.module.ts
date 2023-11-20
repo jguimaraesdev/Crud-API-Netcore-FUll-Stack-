@@ -7,29 +7,33 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule} from 'ngx-bootstrap/modal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
-
+import { FormsModule } from '@angular/forms';
 
 
 import { VeiculosService } from 'src/app/services/veiculos.service';
-import { VeiculosComponent } from './components/veiculos/veiculos.component';
+import { VeiculosComponent } from './pages/veiculos/veiculos.component';
 import { ClientesService } from './services/clientes.service';
-import { ClientesComponent } from './components/clientes/clientes.component';
+import { ClientesComponent } from './pages/clientes/clientes.component';
 import { MarcasService } from './services/marcas.service';
-import { MarcasComponent } from './components/marcas/marcas.component';
+import { MarcasComponent } from './pages/marcas/marcas.component';
 import { ModelosService } from './services/modelos.service';
-import { ModelosComponent } from './components/modelos/modelos.component';
+import { ModelosComponent } from './pages/modelos/modelos.component';
 import { PeriodosService} from './services/periodos.service';
-import { PeriodosComponent } from './components/periodos/periodos.component';
+import { PeriodosComponent } from './pages/periodos/periodos.component';
 import { TicketsService } from './services/tickets.service';
-import { TicketsComponent } from './components/tickets/tickets.component';
+import { TicketsComponent } from './pages/tickets/tickets.component';
 import { ServicosService } from './services/servicos.service';
-import { ServicosComponent } from './components/servicos/servicos.component';
+import { ServicosComponent } from './pages/servicos/servicos.component';
 import { NotaFiscalService } from './services/notas-fiscais.service';
-import { NotasFiscaisComponent } from './components/notas-fiscais/notas-fiscais.component';
-import { HomeComponent } from './components/home/home.component';
+import { NotasFiscaisComponent } from './pages/notas-fiscais/notas-fiscais.component';
+import { HomeComponent } from './pages/home/home.component';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { ServicoextrasComponent } from './components/servicoextras/servicoextras.component';
-import { PagarComponent } from './components/pagar/pagar.component';
+import { ServicoextrasComponent } from './pages/servicoextras/servicoextras.component';
+import { PagarComponent } from './components/servicos.findall/pagar.component';
+import { ServicosEditComponent } from './components/servicos.edit/servicos.edit.component';
+import { TicketsFindallComponent } from './components/tickets.findall/tickets.findall.component';
+import { PagarTicketComponent } from './components/pagar.ticket/pagar.ticket.component';
+import { TicketEditComponent } from './components/ticket.edit/ticket.edit.component';
 
 
 
@@ -48,6 +52,10 @@ import { PagarComponent } from './components/pagar/pagar.component';
     HomeComponent,
     ServicoextrasComponent,
     PagarComponent,
+    ServicosEditComponent,
+    TicketsFindallComponent,
+    PagarTicketComponent,
+    TicketEditComponent
 
   ],
   imports: [
@@ -58,6 +66,7 @@ import { PagarComponent } from './components/pagar/pagar.component';
     ReactiveFormsModule,
     ModalModule.forRoot(),
     BrowserAnimationsModule,
+    FormsModule
   
   ],
   providers: [
@@ -70,7 +79,7 @@ import { PagarComponent } from './components/pagar/pagar.component';
     PeriodosService,
     TicketsService,
     ServicosService,
-    NotaFiscalService,
+    NotaFiscalService
     
   ],
   bootstrap: [AppComponent]

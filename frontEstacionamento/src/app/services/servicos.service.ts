@@ -35,12 +35,6 @@ export class ServicosService {
     return this.http.post<any>(url, servico, httpOptions);
   }
 
-  update(id: number, valor: number): Observable<any> {
-    const url = `${this.apiUrl}/update/ValorServico`;
-    const data = { id: id, valor: valor };
-    return this.http.put<any>(url, data, httpOptions);
-  }
-
   alterar(servico: Servico): Observable<any> {
     const url = `${this.apiUrl}/alterar`;
     return this.http.put<any>(url, servico, httpOptions);

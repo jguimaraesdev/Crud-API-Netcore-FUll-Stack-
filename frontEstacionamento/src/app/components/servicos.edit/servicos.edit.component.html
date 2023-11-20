@@ -1,0 +1,53 @@
+<div class="container p-5">
+    <div class="row">
+      <div class="col-6 border border-light rounded p-5 shadow">
+        <h6>{{ tituloFormulario }}</h6>
+        <form [formGroup]="servicosform" (ngSubmit)="enviarFormulario()"  #formDit="ngForm">
+            <div class="form-group">
+                <label>ID Serviço</label>
+                <input type="number" class="form-control form-control-sm" formControlName="_idServico" required/>
+              </div>
+            <div class="form-group">
+            <label>Código Ticket</label>
+                <input type="text" class="form-control form-control-sm" formControlName="_codTicket" required/>
+            </div>
+            <div class="form-action">
+                <label>Selecione o tipo:</label>
+                <select class="form-control form-control-sm" formControlName="_tipoServico" required>
+                  <option Value= "Estética">Estética</option>
+                  <option Value= "Higienização">Higienização</option>
+                </select>
+              </div>
+          <div class="form-action">
+            <label>Valor de Serviço</label>
+            <select class="form-control form-control-sm" formControlName="_valorServico" required>
+              <option [ngValue]="'250.00'">R$250,00</option>
+              <option [ngValue]="'150.00'">R$150,00</option>
+            </select>
+          </div>
+          <div class="form-action">
+            <label>Pagamento</label>
+            <select type="text" class="form-control form-control-sm" formControlName="_Pagamento" required>
+              <option value="true">OK</option>
+              <option value="false">Pendente</option>
+            </select>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div>
+                <div>
+                <button type="submit" class="btn btn-primary btn-sm">
+                  Salvar
+                </button>
+              </div>
+              </div>
+              <div class="pl-1">
+                <button type="button" class="btn btn-sm btn-light" routerLink="/pagar">Voltar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+       <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>

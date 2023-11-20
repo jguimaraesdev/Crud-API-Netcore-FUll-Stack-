@@ -62,58 +62,21 @@ using Microsoft.EntityFrameworkCore;
         }
 
         //--------------------------------------------------------------------//
-
-        [HttpPut]
-        [Route("alterar")]
-        public async Task<IActionResult> Alterar(Servico servico)
-        {
-            if (_context is null) return BadRequest();
-            if (_context.servico is null) return BadRequest();
-            var servicotemp = await _context.servico.FindAsync(servico._idServico);
-            if (servicotemp is null) return BadRequest();
-            servicotemp._idServico = servico._idServico;
-            await _context.SaveChangesAsync();
-            
-            return Ok();
-        }
-
-
-        //--------------------------------------------------------------------//
-
-       
-
-        [HttpPut]
-        [Route("update/tiposervico")]
-        private async Task<IActionResult> updatetiposervico(Servico servico)
-        {
-            if (_context is null) return BadRequest();
-            if (_context.servico is null) return BadRequest();
-            var servicotemp = await _context.servico.FindAsync(servico._idServico);
-            if (servicotemp is null) return BadRequest();
-
-            return Ok();
-        }
-
-
-        //--------------------------------------------------------------------//
-
+    [HttpPut()]
+    [Route("alterar")]
+    public async Task<ActionResult> Alterar(Servico servico)
+    {
+        if (_context is null) return BadRequest();
+        if (_context.servico is null) return BadRequest();
+        var marcaTemp = await _context.servico.FindAsync(servico._idServico);
+        if (marcaTemp is null) return BadRequest();
         
-        /*
-        [HttpPut]
-        [Route("update/ValorPagar")]
-        public async Task<IActionResult> UpdateValorPagar(string codigoticket, double valor)
-        {
-            if (_context is null) return BadRequest();
-            if (_context.servico is null) return BadRequest();
-            var servicotemp = await _context.servico.FirstOrDefaultAsync(x =>x._idServico == ordemservico);
-            if (servicotemp is null) return BadRequest();
-            servicotemp._valorPagar = valor;
-            await _context.SaveChangesAsync();
-            return Ok();
-        }
-
-        */
-        
+        marcaTemp._tipoServico = servico._tipoServico;
+        marcaTemp._valorServico = servico._valorServico;
+        marcaTemp._Pagamento = servico._Pagamento;
+        await _context.SaveChangesAsync();
+        return Ok();
+    }
 
         //--------------------------------------------------------------------//
         [HttpDelete]

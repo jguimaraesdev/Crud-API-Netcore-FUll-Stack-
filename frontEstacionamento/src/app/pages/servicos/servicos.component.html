@@ -1,0 +1,47 @@
+<div class="container p-5">
+  <div class="row">
+    <div class="col-6 border border-light rounded p-5 shadow" *ngIf="formulario">
+      <h6>{{ tituloFormulario }}</h6>
+      <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
+        <div class="form-group">
+          <label>Código Ticket</label>
+          <select class="form-control form-control-sm" formControlName="_codTicket" required>
+            <option *ngFor="let ticket of tickets" [value]="ticket._codTicket">
+              {{ ticket._codTicket}} Placa 
+              {{ ticket._Placa}} 
+            </option>
+          </select>
+        </div>
+        <div class="form-action">
+          <label>Selecione valor:</label>
+          <select class="form-control form-control-sm" formControlName="_valorServico" required>
+            <option [ngValue]="'250.00'">R$250,00</option>
+            <option [ngValue]="'150.00'">R$150,00</option>
+          </select>
+        </div>
+        <div class="form-action">
+          <label>Selecione o tipo:</label>
+          <select class="form-control form-control-sm" formControlName="_tipoServico" required>
+            <option Value="Estética">Estética</option>
+            <option Value="Higienização">Higienização</option>
+          </select>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div>
+              <div>
+              <button type="submit" class="btn btn-primary btn-sm">
+                Salvar
+              </button>
+            </div>
+            </div>
+            <div class="pl-1">
+              <button type="button" class="btn btn-sm btn-light" routerLink="/veiculo">Voltar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      veja os valores <a routerLink="/servicoextras">Clicando aqui</a><router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

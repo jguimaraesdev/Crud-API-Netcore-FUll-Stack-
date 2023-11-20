@@ -1,0 +1,44 @@
+<div class="container p-5">
+    <div class="row">
+      <div class="col-6 border border-light rounded p-5 shadow" *ngIf="formulario">
+        <h6>{{ tituloFormulario }}</h6>
+        <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
+          <div class="form-group">
+            <label>ID TICKET</label>
+            <select class="form-control form-control-sm" formControlName="_idTicket" required>
+              <option *ngFor="let ticket of ticketlist" [value]="ticket._idTicket">
+                {{ticket._idTicket}}
+              </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Cod Ticket</label>
+            <select class="form-control form-control-sm" formControlName="_codTicket" required>
+                <option *ngFor="let ticket of ticketlist" [value]="ticket._codTicket">
+                    {{ticket._codTicket}}
+                  </option>
+            </select>
+            <label>Placa</label>
+            <select class="form-control form-control-sm" formControlName="_Placa" required>
+                <option *ngFor="let ticket of ticketlist" [value]="ticket._Placa">
+                    {{ticket._Placa}}
+                  </option>
+            </select>
+        </div>
+          <div class="container">
+            <div class="row">
+              <div>
+                <button type="submit" class="btn btn-primary btn-sm">
+                  Pagar
+                </button>
+              </div>
+              <div class="pl-1">
+                <button type="button" class="btn btn-sm btn-light" routerLink="/home">Voltar</button><router-outlet></router-outlet>
+              </div>
+            </div>
+          </div>
+        </form>
+        deseja CPF na nota? <a routerLink="/cliente">Clique aqui</a><router-outlet></router-outlet>
+      </div>
+    </div>
+</div>
