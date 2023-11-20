@@ -64,45 +64,44 @@ using Microsoft.EntityFrameworkCore;
         //--------------------------------------------------------------------//
     
         [HttpPut]
-[Route("alterar")]
-public async Task<ActionResult> Alterar(Servico servico)
-{
-    if (_context is null)
-    {
+        [Route("alterar")]
+        public async Task<ActionResult> Alterar(Servico servico)
+        {
+        if (_context is null)
+        {
         return BadRequest("Contexto não encontrado.");
-    }
+        }
 
-    if (servico is null)
-    {
-        return BadRequest("O serviço fornecido é nulo.");
-    }
+        if (servico is null || servico._idServico <= 0)
+        {
+        return BadRequest("O serviço fornecido é inválido.");
+        }
 
-    // Use FirstOrDefaultAsync para obter o serviço com base no ID
-    var servicoTemp = await _context.servico.FindAsync(servico._idServico);
+        var servicoTemp = await _context.servico.AsNoTracking().FirstOrDefaultAsync(s => s._idServico == servico._idServico);
 
-    // Verifique se o serviçoTemp é nulo antes de tentar atualizar
-    if (servicoTemp == null)
-    {
+        if (servicoTemp == null)
+        {
         return NotFound($"Serviço com ID {servico._idServico} não encontrado.");
-    }
+        }
 
-    try
-    {
+        try
+        {
+        // Atualize as propriedades necessárias
         servicoTemp._Pagamento = servico._Pagamento;
+        servicoTemp._valorServico = servico._valorServico;
+        servicoTemp._tipoServico = servico._tipoServico;
+        // Atualize outras propriedades conforme necessário
 
-        // Atualize apenas a propriedade modificada, não todo o objeto
         _context.servico.Update(servicoTemp);
-
         await _context.SaveChangesAsync();
 
-        return Ok("Serviço atualizado com sucesso.");
-    }
-    catch (Exception ex)
-    {
-        // Log do erro ou outra manipulação apropriada
+        return Ok(servicoTemp); // Retorna o objeto atualizado
+        }
+        catch (Exception ex)
+        {
         return StatusCode(500, $"Erro interno ao atualizar o serviço: {ex.Message}");
-    }
-}
+        }
+        }
     
         //--------------------------------------------------------------------//
         [HttpDelete]
@@ -120,8 +119,6 @@ public async Task<ActionResult> Alterar(Servico servico)
 
 
         //--------------------------------------------------------------------//
-
-
 
 
     }

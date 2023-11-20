@@ -1,15 +1,14 @@
-import { Component, Input } from '@angular/core';
-import { Observer } from 'rxjs';
+import { Component} from '@angular/core';
 import { Servico } from 'src/app/models/Servico';
-import { Ticket } from 'src/app/models/Ticket';
 import { ServicosService } from 'src/app/services/servicos.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-pagar',
-  templateUrl: './pagar.component.html',
-  styleUrls: ['./pagar.component.css']
+  selector: 'app-servicos.findall',
+  templateUrl: './servicos.findall.component.html',
+  styleUrls: ['./servicos.findall.component.css']
 })
-export class PagarComponent {
+export class ServicosfindAllComponent {
 
 
 
@@ -21,7 +20,7 @@ export class PagarComponent {
   
 
 
-  constructor(private servicoService : ServicosService){}
+  constructor(private servicoService : ServicosService, private router : Router){}
   
 
   ngOnInit(): void{
@@ -56,6 +55,8 @@ export class PagarComponent {
           next: () => {
             alert('Registro excluído com sucesso.');
             // Lógica adicional após a exclusão, se necessário
+            setTimeout(()=> this.router.navigate(["/servicofindall"]), 3000);
+            
           },
           error: (error) => {
             console.error('Erro ao excluir:', error);

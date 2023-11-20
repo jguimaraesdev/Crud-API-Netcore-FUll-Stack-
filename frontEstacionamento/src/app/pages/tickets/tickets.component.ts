@@ -67,13 +67,13 @@ export class TicketsComponent implements OnInit {
     if (this.formulario.value._idTicket && !isNaN(Number(this.formulario.value._idTicket))) {
         this.ticketsService.alterar(this.formulario.value).subscribe(observer);
   
-      setTimeout(()=> this.router.navigate(["/home"]), 3000)
+      setTimeout(()=> this.router.navigate(["/home"]), 3000);
       
       
     } else {
       this.ticketsService.cadastrar(this.formulario.value).subscribe(observer);
       
-      setTimeout(()=> this.router.navigate(["/home"]), 3000)
+      setTimeout(()=> this.router.navigate(["/home"]), 3000);
     }
 
     

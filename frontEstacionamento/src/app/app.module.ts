@@ -29,7 +29,7 @@ import { NotasFiscaisComponent } from './pages/notas-fiscais/notas-fiscais.compo
 import { HomeComponent } from './pages/home/home.component';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { ServicoextrasComponent } from './pages/servicoextras/servicoextras.component';
-import { PagarComponent } from './components/servicos.findall/pagar.component';
+import { ServicosfindAllComponent } from './components/servicos.findall/servicos.findall.component';
 import { ServicosEditComponent } from './components/servicos.edit/servicos.edit.component';
 import { TicketsFindallComponent } from './components/tickets.findall/tickets.findall.component';
 import { PagarTicketComponent } from './components/pagar.ticket/pagar.ticket.component';
@@ -51,7 +51,7 @@ import { TicketEditComponent } from './components/ticket.edit/ticket.edit.compon
     NotasFiscaisComponent,
     HomeComponent,
     ServicoextrasComponent,
-    PagarComponent,
+    ServicosfindAllComponent,
     ServicosEditComponent,
     TicketsFindallComponent,
     PagarTicketComponent,

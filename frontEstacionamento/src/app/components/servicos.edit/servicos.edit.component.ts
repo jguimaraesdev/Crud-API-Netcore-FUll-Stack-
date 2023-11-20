@@ -3,9 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observer } from 'rxjs';
 import { Servico } from 'src/app/models/Servico';
-import { Ticket } from 'src/app/models/Ticket';
+
 import { ServicosService } from 'src/app/services/servicos.service';
-import { TicketsService } from 'src/app/services/tickets.service';
+
 
 @Component({
   selector: 'app-servicos.edit',
@@ -18,9 +18,9 @@ export class ServicosEditComponent {
   
   tituloFormulario: string = '';
   servicosform!: FormGroup;
-  router: any;
+  
 
-  constructor(private servicoService : ServicosService) { }
+  constructor(private servicoService : ServicosService, private router: Router) { }
 
 
   ngOnInit(): void {
@@ -47,7 +47,7 @@ export class ServicosEditComponent {
     const observer: Observer<Servico> = {
       next: (_result): void => {
         alert('Serviço alterado com sucesso.');
-
+        setTimeout(()=> this.router.navigate(["/servicofindall"]), 3000);
       },
       error: (_error): void => {
         alert('Erro ao salvar!');
@@ -58,7 +58,7 @@ export class ServicosEditComponent {
     };
   
     this.servicoService.alterar(servico).subscribe(observer);
-    setTimeout(()=> this.router.navigate(["/pagar"]), 3000)
+    
     
     
   }    

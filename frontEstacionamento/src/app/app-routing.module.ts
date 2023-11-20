@@ -10,7 +10,7 @@ import { ServicosComponent } from './pages/servicos/servicos.component';
 import { NotasFiscaisComponent } from './pages/notas-fiscais/notas-fiscais.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ServicoextrasComponent } from './pages/servicoextras/servicoextras.component';
-import { PagarComponent } from './components/servicos.findall/pagar.component';
+import { ServicosfindAllComponent } from './components/servicos.findall/servicos.findall.component';
 import { ServicosEditComponent } from './components/servicos.edit/servicos.edit.component';
 import { TicketsFindallComponent } from './components/tickets.findall/tickets.findall.component';
 import { PagarTicketComponent } from './components/pagar.ticket/pagar.ticket.component';
@@ -28,7 +28,7 @@ const routes: Routes = [
   {path: 'notafiscal', component: NotasFiscaisComponent},
   {path: 'home', component: HomeComponent},
   {path: 'servicoextras', component: ServicoextrasComponent},
-  {path: 'pagar', component: PagarComponent},
+  {path: 'servicosfindall', component: ServicosfindAllComponent},
   {path:'servicosedit', component: ServicosEditComponent},
   {path:'ticketsfindall', component: TicketsFindallComponent},
   {path: 'pagarticket', component:PagarTicketComponent},
