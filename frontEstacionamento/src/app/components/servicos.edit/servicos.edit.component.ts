@@ -41,7 +41,6 @@ export class ServicosEditComponent {
 
   enviarFormulario(): void {
 
-
     const servico: Servico = this.servicosform.value;
     console.log(servico);
   
@@ -57,13 +56,9 @@ export class ServicosEditComponent {
         // Ação a ser executada ao completar
       },
     };
-    
-    /*if (servico._idServico && !isNaN(Number(servico._idServico))) {
-      this.servicoService.alterar(servico).subscribe(observer);
-      setTimeout(()=> this.router.navigate(["/pagar"]), 3000)
-    } else {*/
-      this.servicoService.cadastrar(servico).subscribe(observer);
-      setTimeout(()=> this.router.navigate(["/pagar"]), 3000)
+  
+    this.servicoService.alterar(servico).subscribe(observer);
+    setTimeout(()=> this.router.navigate(["/pagar"]), 3000)
     
     
   }    
