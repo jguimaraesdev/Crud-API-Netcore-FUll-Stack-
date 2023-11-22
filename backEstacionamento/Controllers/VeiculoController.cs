@@ -51,18 +51,46 @@ public class VeiculoController : ControllerBase
     //--------------------------------------------------------------------//
 
     [HttpPut]
-    [Route("alterar")]
-    public async Task<IActionResult> Alterar(Veiculo veiculo)
-    {
-        if(_context is null) return BadRequest();
-        if(_context.veiculo is null) return BadRequest();
-        var veiculoTemp = await _context.veiculo.FindAsync(veiculo._Placa);
-        if(veiculoTemp is null) return BadRequest();
-        veiculoTemp._Placa = veiculo._Placa;
-        veiculoTemp._Cor = veiculo._Cor;
+        [Route("alterar")]
+        public async Task<ActionResult> Alterar(Veiculo veiculo)
+        {
+        if (_context is null)
+        {
+        return BadRequest("Contexto não encontrado.");
+        }
+
+        if (veiculo is null)
+        {
+        return BadRequest("O serviço fornecido é inválido.");
+        }
+
+        var servicoTemp = await _context.veiculo.AsNoTracking().FirstOrDefaultAsync(s => s._Placa == veiculo._Placa);
+
+        if (servicoTemp == null)
+        {
+        return NotFound($"Serviço com ID {veiculo._Placa} não encontrado.");
+        }
+
+        try
+        {
+        // Atualize as propriedades necessárias
+        servicoTemp._Placa = veiculo._Placa;
+        servicoTemp._Cor = veiculo._Cor;
+        servicoTemp._idModelo = veiculo._idModelo;
+       
+        // Atualize outras propriedades conforme necessário
+
+        _context.veiculo.Update(servicoTemp);
         await _context.SaveChangesAsync();
-        return Ok();
-    }
+
+        return Ok(servicoTemp); // Retorna o objeto atualizado
+        }
+        catch (Exception ex)
+        {
+        return StatusCode(500, $"Erro interno ao atualizar o serviço: {ex.Message}");
+        }
+        }
+
     
     //--------------------------------------------------------------------//
 

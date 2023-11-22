@@ -13,10 +13,10 @@ using Microsoft.EntityFrameworkCore;
 
         //injeção de dependencia para a acesso ao banco de dados sqlite;
 
-        private EstacionamentoDbContext _context;
-        public ServicoController(EstacionamentoDbContext context)
+         private EstacionamentoDbContext _dbContext;
+        public ServicoController(EstacionamentoDbContext dbContext)
         {
-            _context = context;
+        _dbContext = dbContext;
         }
 
         //--------------------------------------------------------------------//
@@ -28,9 +28,9 @@ using Microsoft.EntityFrameworkCore;
         public async Task<ActionResult<IEnumerable<Servico>>> Listar()
 
         {
-            if (_context is null) return BadRequest();
-            if (_context.servico is null) return BadRequest();
-            return await _context.servico.ToListAsync();
+            if (_dbContext is null) return BadRequest();
+            if (_dbContext.servico is null) return BadRequest();
+            return await _dbContext.servico.ToListAsync();
 
         }
 
@@ -40,9 +40,9 @@ using Microsoft.EntityFrameworkCore;
         [Route("buscar/{id}")]
         public async Task<ActionResult<Servico>> Buscar(int id)
         {
-            if (_context is null) return BadRequest();
-            if (_context.servico is null) return BadRequest();
-            var servico1 = await _context.servico.FindAsync(id);
+            if (_dbContext is null) return BadRequest();
+            if (_dbContext.servico is null) return BadRequest();
+            var servico1 = await _dbContext.servico.FindAsync(id);
             if (servico1 is null) return BadRequest();
             return servico1;
         }
@@ -54,9 +54,9 @@ using Microsoft.EntityFrameworkCore;
         [Route("cadastrar")]
         public async Task<IActionResult> Cadastrar(Servico servico)
         {
-             if (_context is null) return BadRequest();
-            await _context.AddAsync(servico);
-            await _context.SaveChangesAsync();
+             if (_dbContext is null) return BadRequest();
+            await _dbContext.AddAsync(servico);
+            await _dbContext.SaveChangesAsync();
             return Created("",servico);
             
         }
@@ -67,7 +67,7 @@ using Microsoft.EntityFrameworkCore;
         [Route("alterar")]
         public async Task<ActionResult> Alterar(Servico servico)
         {
-        if (_context is null)
+        if (_dbContext is null)
         {
         return BadRequest("Contexto não encontrado.");
         }
@@ -77,7 +77,7 @@ using Microsoft.EntityFrameworkCore;
         return BadRequest("O serviço fornecido é inválido.");
         }
 
-        var servicoTemp = await _context.servico.AsNoTracking().FirstOrDefaultAsync(s => s._idServico == servico._idServico);
+        var servicoTemp = await _dbContext.servico.AsNoTracking().FirstOrDefaultAsync(s => s._idServico == servico._idServico);
 
         if (servicoTemp == null)
         {
@@ -92,8 +92,8 @@ using Microsoft.EntityFrameworkCore;
         servicoTemp._tipoServico = servico._tipoServico;
         // Atualize outras propriedades conforme necessário
 
-        _context.servico.Update(servicoTemp);
-        await _context.SaveChangesAsync();
+        _dbContext.servico.Update(servicoTemp);
+        await _dbContext.SaveChangesAsync();
 
         return Ok(servicoTemp); // Retorna o objeto atualizado
         }
@@ -108,18 +108,59 @@ using Microsoft.EntityFrameworkCore;
         [Route("excluir/{id}")]
         public async Task<IActionResult> excluir(int id)
         {
-            if (_context is null) return BadRequest();
-            if (_context.servico is null) return BadRequest();
-            var servico = await _context.servico.FindAsync(id);
+            if (_dbContext is null) return BadRequest();
+            if (_dbContext.servico is null) return BadRequest();
+            var servico = await _dbContext.servico.FindAsync(id);
             if (servico is null) return BadRequest();
-            _context.Remove(servico);
-            await _context.SaveChangesAsync();
+            _dbContext.Remove(servico);
+            await _dbContext.SaveChangesAsync();
             return Ok();
         }
 
 
         //--------------------------------------------------------------------//
 
+    //--------------------------------------------------------------------//
+    
+        [HttpPut]
+        [Route("pagar")]
+        public async Task<ActionResult> Pagar(Servico servico)
+        {
+        if (_dbContext is null)
+        {
+        return BadRequest("Contexto não encontrado.");
+        }
 
+        if (servico is null || servico._idServico <= 0)
+        {
+        return BadRequest("O serviço fornecido é inválido.");
+        }
+
+        var servicoTemp = await _dbContext.servico.AsNoTracking().FirstOrDefaultAsync(s => s._idServico == servico._idServico);
+
+        if (servicoTemp == null)
+        {
+        return NotFound($"Serviço com ID {servico._idServico} não encontrado.");
+        }
+
+        try
+        {
+        // Atualize as propriedades necessárias
+            
+            servicoTemp._Pagamento = servico._Pagamento;
+        
+        // Atualize outras propriedades conforme necessário
+
+       _dbContext.servico.Update(servicoTemp);
+        await _dbContext.SaveChangesAsync();
+
+        return Ok(servicoTemp); // Retorna o objeto atualizado
+        }
+        catch (Exception ex)
+        {
+        return StatusCode(500, $"Erro interno ao atualizar o serviço: {ex.Message}");
+        }
+        }
+    
     }
 

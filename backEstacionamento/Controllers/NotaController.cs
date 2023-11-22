@@ -52,18 +52,45 @@ public class NotaController : ControllerBase
     //--------------------------------------------------------------------//
 
     [HttpPut]
-    [Route("alterar")]
-    public async Task<IActionResult> Alterar(NotaFiscal notafiscal)
-    {
-        if (_context is null) return BadRequest();
-        if (_context.notafiscal is null) return BadRequest();
-        var nota = await _context.notafiscal.FindAsync(notafiscal._NumeroNota);
-         if (nota is null) return BadRequest();
-        nota._NumeroNota = notafiscal._NumeroNota;
-        
+        [Route("alterar")]
+        public async Task<ActionResult> Alterar(NotaFiscal nota)
+        {
+        if (_context is null)
+        {
+        return BadRequest("Contexto não encontrado.");
+        }
+
+        if (nota is null)
+        {
+        return BadRequest("O serviço fornecido é inválido.");
+        }
+
+        var servicoTemp = await _context.notafiscal.AsNoTracking().FirstOrDefaultAsync(s => s._NumeroNota == nota._NumeroNota);
+
+        if (servicoTemp == null)
+        {
+        return NotFound($"Serviço com ID {nota._NumeroNota} não encontrado.");
+        }
+
+        try
+        {
+        // Atualize as propriedades necessárias
+        servicoTemp._ValorDaNota = nota._ValorDaNota;
+        servicoTemp._Cpf=nota._Cpf;
+        servicoTemp._idServico = nota._idServico;
+        // Atualize outras propriedades conforme necessário
+
+        _context.notafiscal.Update(servicoTemp);
         await _context.SaveChangesAsync();
-        return Ok();
-    }
+
+        return Ok(servicoTemp); // Retorna o objeto atualizado
+        }
+        catch (Exception ex)
+        {
+        return StatusCode(500, $"Erro interno ao atualizar o serviço: {ex.Message}");
+        }
+        }
+
     
     //--------------------------------------------------------------------//
 

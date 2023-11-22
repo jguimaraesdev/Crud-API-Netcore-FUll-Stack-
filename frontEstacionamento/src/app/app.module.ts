@@ -34,6 +34,7 @@ import { ServicosEditComponent } from './components/servicos.edit/servicos.edit.
 import { TicketsFindallComponent } from './components/tickets.findall/tickets.findall.component';
 import { PagarTicketComponent } from './components/pagar.ticket/pagar.ticket.component';
 import { TicketEditComponent } from './components/ticket.edit/ticket.edit.component';
+import { ServicosPagarComponent } from './components/servicos.pagar/servicos.pagar.component';
 
 
 
@@ -55,7 +56,8 @@ import { TicketEditComponent } from './components/ticket.edit/ticket.edit.compon
     ServicosEditComponent,
     TicketsFindallComponent,
     PagarTicketComponent,
-    TicketEditComponent
+    TicketEditComponent,
+    ServicosPagarComponent
 
   ],
   imports: [

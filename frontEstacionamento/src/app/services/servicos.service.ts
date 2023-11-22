@@ -45,4 +45,9 @@ export class ServicosService {
     const url = `${this.apiUrl}/excluir/${id}`;
     return this.http.delete<any>(url, httpOptions);
   }
+
+  pagar(servico: Servico): Observable<any> {
+    const url = `${this.apiUrl}/pagar`;
+    return this.http.put<any>(url, servico, httpOptions);
+  }
 }

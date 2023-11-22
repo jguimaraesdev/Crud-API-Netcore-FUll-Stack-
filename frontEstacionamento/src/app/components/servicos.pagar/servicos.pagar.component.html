@@ -1,0 +1,47 @@
+<div class="container p-5">
+    <div class="row">
+      <div class="col-6 border border-light rounded p-5 shadow">
+        <h6>{{ tituloFormulario }}</h6>
+        <form [formGroup]="servicosform" (ngSubmit)="enviarFormulario()"  #formDit="ngForm">
+            <div class="form-group">
+                <label>ID Serviço</label>
+                <select type="number" class="form-control form-control-sm" formControlName="_idServico" required>
+                    <option *ngFor="let servico of listaservicos" [value]="servico._idServico">
+                        {{servico._idServico}}
+                      </option>
+                </select>
+              </div>
+            <div class="form-group">
+            <label>Código Ticket</label>
+            <select class="form-control form-control-sm" formControlName="_codTicket" required>
+                <option *ngFor="let servico of listaservicos" [value]="servico._codTicket">
+                    {{servico._codTicket}}
+                  </option>
+            </select>
+            </div>
+          <div class="form-action">
+            <label>Pagamento</label>
+            <select type="text" class="form-control form-control-sm" formControlName="_Pagamento" required>
+              <option value="true">OK</option>
+              <option value="false">Pendente</option>
+            </select>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div>
+                <div>
+                <button type="submit" class="btn btn-primary btn-sm">
+                  Salvar
+                </button>
+              </div>
+              </div>
+              <div class="pl-1">
+                <button type="button" class="btn btn-sm btn-light" routerLink="/servicosfindall">Voltar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+       <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>

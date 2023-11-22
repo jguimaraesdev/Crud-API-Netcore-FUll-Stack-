@@ -15,6 +15,7 @@ import { ServicosEditComponent } from './components/servicos.edit/servicos.edit.
 import { TicketsFindallComponent } from './components/tickets.findall/tickets.findall.component';
 import { PagarTicketComponent } from './components/pagar.ticket/pagar.ticket.component';
 import { TicketEditComponent } from './components/ticket.edit/ticket.edit.component';
+import { ServicosPagarComponent } from './components/servicos.pagar/servicos.pagar.component';
 
 const routes: Routes = [
   
@@ -32,7 +33,8 @@ const routes: Routes = [
   {path:'servicosedit', component: ServicosEditComponent},
   {path:'ticketsfindall', component: TicketsFindallComponent},
   {path: 'pagarticket', component:PagarTicketComponent},
-  {path: 'ticketedit', component: TicketEditComponent}
+  {path: 'ticketedit', component: TicketEditComponent},
+  {path: 'servicospagar', component: ServicosPagarComponent}
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

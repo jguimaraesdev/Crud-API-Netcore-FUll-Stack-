@@ -51,18 +51,46 @@ public class MarcaController : ControllerBase
 
     //--------------------------------------------------------------------//
     
-    [HttpPut()]
-    [Route("alterar")]
-    public async Task<ActionResult> Alterar(Marca marca)
-    {
-        if (_dbContext is null) return BadRequest();
-        if (_dbContext.marca is null) return BadRequest();
-        var marcaTemp = await _dbContext.marca.FindAsync(marca._idMarca);
-        if (marcaTemp is null) return BadRequest();
-        marcaTemp._nomeMarca = marca._nomeMarca;
+        [HttpPut]
+        [Route("alterar")]
+        public async Task<ActionResult> Alterar(Marca marca)
+        {
+        if (_dbContext is null)
+        {
+        return BadRequest("Contexto não encontrado.");
+        }
+
+        if (marca is null)
+        {
+        return BadRequest("O serviço fornecido é inválido.");
+        }
+
+        var servicoTemp = await _dbContext.marca.AsNoTracking().FirstOrDefaultAsync(s => s._idMarca== marca._idMarca);
+
+        if (servicoTemp == null)
+        {
+        return NotFound($"Serviço com ID {marca._idMarca} não encontrado.");
+        }
+
+        try
+        {
+        // Atualize as propriedades necessárias
+        servicoTemp._nomeMarca = marca._nomeMarca;
+        servicoTemp._segmento= marca._segmento;
+       
+        // Atualize outras propriedades conforme necessário
+
+        _dbContext.marca.Update(servicoTemp);
         await _dbContext.SaveChangesAsync();
-        return Ok();
-    }
+
+        return Ok(servicoTemp); // Retorna o objeto atualizado
+        }
+        catch (Exception ex)
+        {
+        return StatusCode(500, $"Erro interno ao atualizar o serviço: {ex.Message}");
+        }
+        }
+
 
     //--------------------------------------------------------------------//
 

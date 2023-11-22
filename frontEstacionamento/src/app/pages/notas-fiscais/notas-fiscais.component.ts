@@ -8,6 +8,7 @@ import { ServicosService } from 'src/app/services/servicos.service';
 import { NotaFiscalService } from 'src/app/services/notas-fiscais.service';
 import { NotaFiscal } from 'src/app/models/NotaFiscal';
 import { TicketsService } from 'src/app/services/tickets.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notafiscal',
@@ -24,7 +25,8 @@ export class NotasFiscaisComponent implements OnInit {
   constructor(private notaFiscalService : NotaFiscalService, 
     private clientesService: ClientesService, 
     private servicosService: ServicosService,
-    private ticketService: TicketsService) { }
+    private ticketService: TicketsService,
+    private router: Router) { }
 
 
   ngOnInit(): void {
@@ -67,9 +69,10 @@ export class NotasFiscaisComponent implements OnInit {
     };
     if (notas._NumeroNota && !isNaN(Number(notas._NumeroNota))) {
       this.notaFiscalService.alterar(notas).subscribe(observer);
-     
+      setTimeout(()=> this.router.navigate(["/servicosfindall"]), 3000)
     } else {
       this.notaFiscalService.cadastrar(notas).subscribe(observer);
+      setTimeout(()=> this.router.navigate(["/servicosfindall"]), 3000)
     }
   }
 

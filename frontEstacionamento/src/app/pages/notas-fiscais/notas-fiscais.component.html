@@ -27,7 +27,7 @@
             <label>Valor Nota</label>
             <select class="form-control form-control-sm" formControlName="_ValorDaNota" required>
             <option  *ngFor="let servico of servicos" [value]="servico._valorServico">
-              R${{servico._valorServico}},00
+              R${{servico._valorServico}},00 {{ servico._tipoServico}}
             </option>
             </select>
         </div>

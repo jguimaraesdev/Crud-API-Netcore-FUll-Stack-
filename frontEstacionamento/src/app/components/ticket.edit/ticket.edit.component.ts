@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observer } from 'rxjs';
 import { Ticket } from 'src/app/models/Ticket';
 import { TicketsService } from 'src/app/services/tickets.service';
@@ -17,12 +18,12 @@ export class TicketEditComponent {
   ticketlist: Array<Ticket> | undefined;
 
 
-  constructor(private ticketService: TicketsService) { }
+  constructor(private ticketService: TicketsService, private router: Router) { }
 
 
   ngOnInit(): void {
     
-    this.tituloFormulario = 'Pagar Ticket';
+    this.tituloFormulario = 'Editar Ticket';
 
     this.ticketService.listar().subscribe(cliente => {
       this.ticketlist = cliente;
@@ -43,7 +44,8 @@ export class TicketEditComponent {
     const ticket: Ticket = this.formulario.value;
     const observer: Observer<Ticket> = {
       next(_result): void {
-        alert('Ticket pago com sucesso.');
+        alert('Ticket editado com sucesso.');
+        
       },
       error(_error): void {
         alert('Erro ao pagar!');
@@ -53,6 +55,7 @@ export class TicketEditComponent {
     };
     
       this.ticketService.alterar(ticket).subscribe(observer);
+      setTimeout(()=> this.router.navigate(["/ticketsfindall"]), 3000);
   }
 
 }

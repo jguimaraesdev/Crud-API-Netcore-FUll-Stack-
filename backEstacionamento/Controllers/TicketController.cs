@@ -75,19 +75,45 @@ using Microsoft.EntityFrameworkCore;
     //--------------------------------------------------------------------//
 
 
-    [HttpPut]
-    [Route("alterar")]
-    public async Task<IActionResult>alterar(Ticket ticket)
-    {
-        if (_dbContext is null) return BadRequest();
-        if (_dbContext.ticket is null) return BadRequest();
-        var tickettemp = await _dbContext.ticket.FirstOrDefaultAsync(x => x._idTicket==ticket._idTicket);
-        if (tickettemp is null) return BadRequest();
-        tickettemp._HoraSaida = ticket._HoraSaida;
-        tickettemp._Pagamento=ticket._Pagamento;
+        [HttpPut]
+        [Route("alterar")]
+        public async Task<ActionResult> Alterar(Ticket ticket)
+        {
+        if (_dbContext is null)
+        {
+        return BadRequest("Contexto não encontrado.");
+        }
+
+        if (ticket is null)
+        {
+        return BadRequest("O serviço fornecido é inválido.");
+        }
+
+        var servicoTemp = await _dbContext.ticket.AsNoTracking().FirstOrDefaultAsync(s => s._idTicket == ticket._idTicket);
+
+        if (servicoTemp == null)
+        {
+        return NotFound($"Serviço com ID {ticket._idTicket} não encontrado.");
+        }
+
+        try
+        {
+        // Atualize as propriedades necessárias
+        servicoTemp._HoraSaida=ticket._HoraSaida;
+        servicoTemp._Pagamento=ticket._Pagamento;
+        // Atualize outras propriedades conforme necessário
+
+        _dbContext.ticket.Update(servicoTemp);
         await _dbContext.SaveChangesAsync();
-        return Ok();
-    }
+
+        return Ok(servicoTemp); // Retorna o objeto atualizado
+        }
+        catch (Exception ex)
+        {
+        return StatusCode(500, $"Erro interno ao atualizar o serviço: {ex.Message}");
+        }
+        }
+
 
     //--------------------------------------------------------------------//
 

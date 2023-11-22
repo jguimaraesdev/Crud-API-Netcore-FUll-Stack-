@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Periodo } from 'src/app/models/Periodo';
 import { Ticket } from 'src/app/models/Ticket';
 import { PeriodosService } from 'src/app/services/periodos.service';
@@ -20,7 +21,7 @@ export class TicketsFindallComponent {
   listaperiodos: Array<Periodo> = new Array;
   lista:Array<Periodo> = new Array;
 
-  constructor(private ticketservice : TicketsService, private periodoService: PeriodosService){}
+  constructor(private ticketservice : TicketsService, private periodoService: PeriodosService, private router: Router){}
   
 
   ngOnInit(): void{
@@ -72,6 +73,7 @@ export class TicketsFindallComponent {
       // Lidar com a situação em que 'id' é undefined
       console.error('ID não fornecido para excluirRegistro');
     }
+    setTimeout(()=> this.router.navigate(["/ticketsfindall"]), 3000);
   }
   
 }

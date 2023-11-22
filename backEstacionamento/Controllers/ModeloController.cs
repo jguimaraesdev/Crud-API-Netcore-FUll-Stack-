@@ -55,18 +55,46 @@ public class ModeloController : ControllerBase
 
     //--------------------------------------------------------------------//
 
-    [HttpPut()]
-    [Route("alterar")]
-    public async Task<ActionResult> Alterar(Modelo modelo)
-    {
-        if(_dbContext is null) return BadRequest();
-        if(_dbContext.modelo is null) return BadRequest();
-        var modeloTemp = await _dbContext.modelo.FindAsync(modelo._idMarca);
-        if(modeloTemp is null) return BadRequest();
-        modeloTemp._nomeModelo = modelo._nomeModelo;
+        [HttpPut]
+        [Route("alterar")]
+        public async Task<ActionResult> Alterar(Modelo modelo)
+        {
+        if (_dbContext is null)
+        {
+        return BadRequest("Contexto não encontrado.");
+        }
+
+        if (modelo is null)
+        {
+        return BadRequest("O serviço fornecido é inválido.");
+        }
+
+        var servicoTemp = await _dbContext.modelo.AsNoTracking().FirstOrDefaultAsync(s => s._idModelo == modelo._idModelo);
+
+        if (servicoTemp == null)
+        {
+        return NotFound($"Serviço com ID {modelo._idModelo} não encontrado.");
+        }
+
+        try
+        {
+        // Atualize as propriedades necessárias
+        servicoTemp._nomeModelo=modelo._nomeModelo;
+        servicoTemp._AnoModelo=modelo._AnoModelo;
+        servicoTemp._TipoModelo=modelo._TipoModelo;
+        // Atualize outras propriedades conforme necessário
+
+        _dbContext.modelo.Update(servicoTemp);
         await _dbContext.SaveChangesAsync();
-        return Ok();
-    }
+
+        return Ok(servicoTemp); // Retorna o objeto atualizado
+        }
+        catch (Exception ex)
+        {
+        return StatusCode(500, $"Erro interno ao atualizar o serviço: {ex.Message}");
+        }
+        }
+
 
     //--------------------------------------------------------------------//
     
